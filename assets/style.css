@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #f8f8f8;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     padding: 10px 20px;
@@ -16,14 +16,16 @@
 }
 
 .topnav a {
-    color: black;
+    color: #333333;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
+    letter-spacing: 2px;
     padding: 14px 20px;
     flex-grow: 1;
     text-align: center;
 }
 
 .topnav a.active {
-    font-weight: bold;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
 }
