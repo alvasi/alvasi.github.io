@@ -1,6 +1,7 @@
 .topnav {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     background-color: #ffffff;
     display: flex;
@@ -13,6 +14,7 @@
 .topnav img {
     height: 40px;
     margin-right: 20px;
+    padding-right: 20px;
 }
 
 .topnav a {
@@ -22,7 +24,7 @@
     letter-spacing: 2px;
     padding: 14px 20px;
     flex-grow: 1;
-    text-align: center;
+    text-align: left;
 }
 
 .topnav a.active {
