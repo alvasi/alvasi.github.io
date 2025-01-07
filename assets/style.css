@@ -22,7 +22,7 @@
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     letter-spacing: 2px;
-    padding: 14px 20px;
+    padding: 15px 15px;
     flex-grow: 1;
     text-align: left;
     margin-inline: 30px;
@@ -31,4 +31,9 @@
 .topnav a.active {
     border-top: 0.5px solid #333333;
     border-bottom: 0.5px solid #333333;
+}
+
+.content {
+    padding-top: 100px;
+    font-family: 'Roboto', sans-serif;
 }
