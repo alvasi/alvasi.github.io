@@ -13,8 +13,8 @@
 
 .topnav img {
     height: 40px;
-    margin-inline-start: 30px;
-    margin-inline-end: 40px;
+    margin-inline-start: 35px;
+    margin-inline-end: 150px;
 }
 
 .topnav a {
@@ -29,6 +29,6 @@
 }
 
 .topnav a.active {
-    border-top: 1px solid #333333;
-    border-bottom: 1px solid #333333;
+    border-top: 0.5px solid #333333;
+    border-bottom: 0.5px solid #333333;
 }
