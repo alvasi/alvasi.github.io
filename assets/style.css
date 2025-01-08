@@ -62,13 +62,11 @@ body {
     align-items: center;
 }
 
-/* .intro-text {
-    font-size: 48px;
+.content.tbc {
     font-family: 'Roboto', monospace;
-    line-height: 1.2;
-    font-weight: 300;
-    margin-inline-start: 25px;
-} */
+    font-size: 24px;
+    align-items: center;
+}
 
 /* Polaroid effect */
 .polaroid {
