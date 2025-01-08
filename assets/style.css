@@ -63,10 +63,11 @@ body {
 }
 
 .intro-text {
-    font-size: 36px;
+    font-size: 64px;
     font-family: 'Roboto', monospace;
-    line-height: 1;
+    line-height: 1.2;
     font-weight: 300;
+    margin-inline-start: 20px;
 }
 
 .circular--portrait {
@@ -87,24 +88,13 @@ body {
 @media (max-width: 768px) {
     .content.intro {
         grid-template-columns: 1fr; /* Stack portrait and text vertically */
-        font-size: 48px; /* Adjust font size for smaller screens */
+        font-size: 32px; /* Adjust font size for smaller screens */
+        text-align: center;
     }
 
     .circular--portrait {
         width: 400px;
         height: 400px;
         margin: 0 auto; /* Center the portrait */
-    }
-}
-
-/* Media query for very small screens */
-@media (max-width: 480px) {
-    .content.intro {
-        font-size: 32px; /* Further adjust font size for very small screens */
-    }
-
-    .circular--portrait {
-        width: 200px;
-        height: 200px;
     }
 }
