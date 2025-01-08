@@ -57,17 +57,17 @@ body {
 
 .content.intro {
     display: grid;
-    grid-template-columns: 35% 65%;
+    grid-template-columns: 45% 55%;
     gap: 30px;
     align-items: center;
 }
 
 .intro-text {
-    font-size: 64px;
+    font-size: 48px;
     font-family: 'Roboto', monospace;
     line-height: 1.2;
     font-weight: 300;
-    margin-inline-start: 20px;
+    margin-inline-start: 30px;
 }
 
 .circular--portrait {
