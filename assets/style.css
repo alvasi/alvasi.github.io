@@ -129,19 +129,6 @@ body {
     }
 }
 
-.intro-text p::after {
-    content: '|';
-    animation: blink 1s step-start infinite;
-    display: inline-block;
-    vertical-align: bottom; /* Align cursor to the bottom of the text */
-    height: 1em; /* Set cursor height to the height of one line */
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
 
 .circular--portrait {
     position: relative;
