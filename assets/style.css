@@ -108,10 +108,10 @@ body {
 .intro-text p {
     font-size: 48px;
     font-family: 'Roboto', monospace;
-    line-height: 1.2;
+    line-height: 2; /* Increase line break spacing */
     font-weight: 300;
     margin-inline-start: 25px;
-    white-space: nowrap;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
     overflow: hidden;
     border-right: 0.15em solid black;
     animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
@@ -124,8 +124,23 @@ body {
 }
 
 @keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: black; }
+    50% {
+        opacity: 0;
+    }
+}
+
+.intro-text p::after {
+    content: '|';
+    animation: blink 1s step-start infinite;
+    display: inline-block;
+    vertical-align: bottom; /* Align cursor to the bottom of the text */
+    height: 1em; /* Set cursor height to the height of one line */
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
 }
 
 .circular--portrait {
