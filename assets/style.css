@@ -45,6 +45,9 @@ body {
     padding-top: 60px;
 }
 
+.grid-container {
+    display: flex;
+}
 .content {
-    padding: 20%;
+    padding: 10%;
 }
