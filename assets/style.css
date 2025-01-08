@@ -113,7 +113,6 @@ body {
     margin-inline-start: 25px;
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
     overflow: hidden;
-    border-right: 0.15em solid black;
     animation: typing 4s steps(40, end);
     display: inline-block;
     position: relative;
@@ -129,6 +128,17 @@ body {
     50% {
         opacity: 0;
     }
+}
+
+.intro-text p::after {
+    content: '|';
+    animation: blink-caret 0.75s step-end infinite;
+    display: inline-block;
+    vertical-align: bottom; /* Align cursor to the bottom of the text */
+    height: 1em; /* Set cursor height to the height of one line */
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 
