@@ -52,15 +52,18 @@ body {
 }
 
 .content {
-    margin: 20px;
+    margin: 10%;
 }
 
 .content.intro {
     display: grid;
     grid-template-columns: 35% 65%;
-    font-family: 'Roboto Mono';
     gap: 30px;
+}
+
+.intro-text {
     font-size: 40px;
+    font-family: 'Roboto', monospace;
     line-height: 1.2;
 }
 
@@ -78,7 +81,7 @@ body {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .content.intro {
         grid-template-columns: 1fr; /* Stack portrait and text vertically */
         font-size: 48px; /* Adjust font size for smaller screens */
