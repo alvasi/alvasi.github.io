@@ -45,12 +45,11 @@ body {
     padding-top: 60px;
 }
 
-.parent {
-    display: grid;
-    grid-template-columns: 100%;
-    padding: 10px;
+.container {
+    display: flex;
+    flex-direction: column;
 }
 
-.child{
-    padding: 10px;
+.content {
+    margin: 20px;
 }
