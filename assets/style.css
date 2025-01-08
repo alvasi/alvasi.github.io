@@ -51,14 +51,14 @@ body {
     flex-direction: column;
 }
 
-/* .content {
-    margin: 15%;
-} */
+.content {
+    margin: 20px;
+}
 
 .content.intro {
     display: grid;
     grid-template-columns: 35% 65%;
-    font-family: 'Roboto', 'monospace';
+    font-family: 'Roboto Mono';
     gap: 30px;
     font-size: 40px;
     line-height: 1.2;
