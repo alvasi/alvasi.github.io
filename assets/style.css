@@ -51,9 +51,9 @@ body {
     flex-direction: column;
 }
 
-.content {
+/* .content {
     margin: 15%;
-}
+} */
 
 .content.intro {
     display: grid;
