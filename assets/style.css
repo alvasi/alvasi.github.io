@@ -59,12 +59,14 @@ body {
     display: grid;
     grid-template-columns: 35% 65%;
     gap: 30px;
+    align-items: center;
 }
 
 .intro-text {
-    font-size: 40px;
+    font-size: 36px;
     font-family: 'Roboto', monospace;
-    line-height: 1.2;
+    line-height: 1;
+    font-weight: 300;
 }
 
 .circular--portrait {
