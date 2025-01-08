@@ -77,11 +77,16 @@ body {
     height: 400px;
     overflow: hidden;
     margin-inline-end: 20px;
+    margin-inline-start: 20px;
 }
 
 .circular--portrait img {
     width: 100%;
     height: auto;
+}
+
+.highlight {
+    color:#888888;
 }
 
 /* Media query for medium screens */
