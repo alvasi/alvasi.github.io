@@ -96,7 +96,7 @@ body {
     width: 100%;
     height: auto;
     opacity: 0;
-    animation: develop 5s forwards 1s; /* 2s delay before starting the animation */
+    animation: develop 7s;
 }
 
 @keyframes develop {
@@ -119,7 +119,7 @@ body {
 }
 
 .final-line {
-    color: #888888;
+    color: #888888; /* Change this to your desired color */
 }
 
 /* Typing effect */
