@@ -96,7 +96,7 @@ body {
     width: 100%;
     height: auto;
     opacity: 0;
-    animation: develop 3s forwards 1s; /* 2s delay before starting the animation */
+    animation: develop 5s forwards 1s; /* 2s delay before starting the animation */
 }
 
 @keyframes develop {
@@ -134,11 +134,12 @@ body {
     content: '|';
     animation: blink-caret 0.75s step-end infinite;
     display: inline-block;
-    vertical-align: bottom; /* Align cursor to the bottom of the text */
+    vertical-align: baseline; /* Align cursor to the bottom of the text */
     height: 1em; /* Set cursor height to the height of one line */
     position: absolute;
     right: 0;
     bottom: 0;
+    line-height: 2;
 }
 
 
