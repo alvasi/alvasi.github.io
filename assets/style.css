@@ -57,10 +57,10 @@ body {
 
 .content.intro {
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 35% 65%;
     font-family: 'Roboto', 'monospace';
     gap: 20px;
-    font-size: 96px;
+    font-size: 64px;
 }
 
 .circular--portrait {
