@@ -59,8 +59,9 @@ body {
     display: grid;
     grid-template-columns: 35% 65%;
     font-family: 'Roboto', 'monospace';
-    gap: 20px;
-    font-size: 64px;
+    gap: 30px;
+    font-size: 40px;
+    line-height: 1.2;
 }
 
 .circular--portrait {
