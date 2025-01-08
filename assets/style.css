@@ -57,7 +57,7 @@ body {
 
 .content.intro {
     display: grid;
-    grid-template-columns: 45% 55%;
+    grid-template-columns: 40% 60%;
     gap: 30px;
     align-items: center;
 }
@@ -67,7 +67,7 @@ body {
     font-family: 'Roboto', monospace;
     line-height: 1.2;
     font-weight: 300;
-    margin-inline-start: 30px;
+    margin-inline-start: 25px;
 }
 
 .circular--portrait {
@@ -93,8 +93,8 @@ body {
     }
 
     .circular--portrait {
-        width: 300px;
-        height: 300px;
+        width: 400px;
+        height: 400px;
         margin: 0 auto; /* Center the portrait */
     }
 }
