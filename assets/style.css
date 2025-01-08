@@ -58,22 +58,20 @@ body {
 .content.intro {
     display: grid;
     grid-template-columns: 25% 75%;
+    font-family: 'Roboto', 'monospace';
+    gap: 20px;
+    font-size: 96px;
 }
 
 .circular--portrait {
     position: relative;
     border-radius: 50%; /* round corners */
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     overflow: hidden;
 }
 
 .circular--portrait img {
     width: 100%;
     height: auto;
-}
-
-.intro-text.h2 {
-    font-family: 'Roboto', monospace;
-    font-size: 96px;
 }
