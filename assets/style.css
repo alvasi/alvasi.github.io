@@ -52,7 +52,7 @@ body {
 }
 
 .content {
-    margin: 10%;
+    margin: 5%;
 }
 
 .content.intro {
@@ -75,6 +75,7 @@ body {
     width: 400px;
     height: 400px;
     overflow: hidden;
+    margin-right: 20px;
 }
 
 .circular--portrait img {
@@ -83,7 +84,7 @@ body {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
     .content.intro {
         grid-template-columns: 1fr; /* Stack portrait and text vertically */
         font-size: 48px; /* Adjust font size for smaller screens */
