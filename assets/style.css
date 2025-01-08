@@ -84,6 +84,21 @@ body {
     height: auto;
 }
 
+/* Media query for medium screens */
+@media (max-width: 1024px) {
+    .content.intro {
+        grid-template-columns: 1fr 1fr; /* Adjust to two equal columns */
+        font-size: 36px; /* Adjust font size for medium screens */
+        gap: 10px; /* Adjust gap for medium screens */
+    }
+
+    .circular--portrait {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto; /* Center the portrait */
+    }
+}
+
 /* Media query for smaller screens */
 @media (max-width: 768px) {
     .content.intro {
