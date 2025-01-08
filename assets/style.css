@@ -131,17 +131,6 @@ body {
     }
 }
 
-.intro-text p::after {
-    /* content: '|';
-    animation: blink-caret 0.75s step-end infinite; */
-    display: inline-block;
-    vertical-align: bottom; /* Align cursor to the bottom of the text */
-    height: 1em; /* Set cursor height to the height of one line */
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
 
 .circular--portrait {
     position: relative;
