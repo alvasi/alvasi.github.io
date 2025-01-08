@@ -118,28 +118,14 @@ body {
     position: relative;
 }
 
+.final-line {
+    color: #888888; /* Change this to your desired color */
+}
+
 /* Typing effect */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
-}
-
-@keyframes blink-caret {
-    50% {
-        opacity: 0;
-    }
-}
-
-.intro-text p::after {
-    content: '|';
-    animation: blink-caret 0.75s step-end infinite;
-    display: inline-block;
-    vertical-align: baseline; /* Align cursor to the bottom of the text */
-    height: 1em; /* Set cursor height to the height of one line */
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    line-height: 2;
 }
 
 
