@@ -6,8 +6,9 @@
     background-color: #ffffff;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 25px; /* top, bottom 10px, left, right 25px */
+    border-bottom: #333333 0.5px solid;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     z-index: 1000;
     overflow-x: auto; /* make topnav bar scrollable */
 }
@@ -22,7 +23,8 @@
     color: #333333;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
-    letter-spacing: 2px;
+    font-size: 24px;
+    letter-spacing: 3px;
     padding: 15px 15px;
     flex-grow: 1;
     text-align: left;
@@ -30,7 +32,7 @@
 }
 
 .topnav a:hover {
-    color:#555555;
+    color:#666666;
 }
 
 .topnav a.active {
@@ -51,5 +53,19 @@ body {
 }
 
 .content {
-    margin: 10%;
+    font-family: 'Roboto', monospace;
+    margin: 15%;
+}
+
+.circular--portrait {
+    position: relative;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.circular--portrait img {
+    width: 100%;
+    height: auto;
 }
