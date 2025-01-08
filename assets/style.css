@@ -45,9 +45,12 @@ body {
     padding-top: 60px;
 }
 
-.grid-container {
-    display: flex;
+.parent {
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 10px;
 }
-.content {
-    padding: 10%;
+
+.child{
+    padding: 10px;
 }
