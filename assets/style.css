@@ -85,10 +85,6 @@ body {
     height: auto;
 }
 
-.highlight {
-    color:#888888;
-}
-
 /* Media query for medium screens */
 @media (max-width: 1024px) {
     .content.intro {
