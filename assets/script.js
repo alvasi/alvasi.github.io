@@ -5,8 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function typeWriter() {
         if (index < text.length) {
-            document.getElementById("intro-text").innerHTML += text.charAt(index);
-            index++;
+            if (text.charAt(index) === '<') {
+                const endIndex = text.indexOf('>', index);
+                document.getElementById("intro-text").innerHTML += text.substring(index, endIndex + 1);
+                index = endIndex + 1;
+            } else {
+                document.getElementById("intro-text").innerHTML += text.charAt(index);
+                index++;
+            }
             setTimeout(typeWriter, speed);
         }
     }
