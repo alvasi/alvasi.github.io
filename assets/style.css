@@ -96,7 +96,7 @@ body {
     width: 100%;
     height: auto;
     opacity: 0;
-    animation: develop 3s forwards 2s; /* 2s delay before starting the animation */
+    animation: develop 3s forwards 1s; /* 2s delay before starting the animation */
 }
 
 @keyframes develop {
