@@ -9,13 +9,12 @@
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    margin-block-end: 10%;
 }
 
 .topnav img {
     height: 40px;
     margin-inline-start: 10%;
-    margin-inline-end: 30%;
+    margin-inline-end: 15%;
 }
 
 .topnav a {
@@ -34,6 +33,9 @@
     border-bottom: 0.5px solid #333333;
 }
 
-.content {
+body {
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 60px;
 }
