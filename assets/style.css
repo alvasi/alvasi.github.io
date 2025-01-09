@@ -81,6 +81,7 @@ body {
     padding-bottom: 60px; /* Extra white bit at the bottom */
     transform: translateX(-100%); /* Initial position off-screen */
     animation: slide-in 1s forwards; /* Slide in animation */
+    animation-delay: 2s; /* Delay slide in animation */
 }
 
 .polaroid-photo {
