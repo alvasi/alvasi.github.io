@@ -134,6 +134,14 @@ body {
     margin-inline-start: 25px;
 }
 
+.details {
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: #333333;
+    margin-inline-start: 25px;
+}
+
 .intro-text p {
     font-size: 48px;
     font-family: 'Roboto', monospace;
@@ -160,10 +168,11 @@ body {
 
 .circular--portrait {
     position: relative;
-    border-radius: 50%; /* round corners */
-    width: 200px;
-    height: 200px;
+    border-radius: 50px; /* round corners */
+    width: 800px;
+    height: 500px;
     overflow: hidden;
+    padding-top: 5%;
     margin-inline-end: 20px;
     margin-inline-start: 20px;
 }
