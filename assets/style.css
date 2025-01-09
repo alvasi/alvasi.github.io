@@ -74,6 +74,14 @@ body {
     justify-content: center;
 }
 
+.content.contact {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 30px;
+    align-items: center;
+    position: relative;
+}
+
 /* Polaroid effect */
 .polaroid {
     width: 300px;
@@ -103,6 +111,7 @@ body {
     height: auto;
     opacity: 0;
     animation: develop 7s forwards;
+    animation-delay: 2s;
 }
 
 @keyframes develop {
@@ -152,8 +161,8 @@ body {
 .circular--portrait {
     position: relative;
     border-radius: 50%; /* round corners */
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     overflow: hidden;
     margin-inline-end: 20px;
     margin-inline-start: 20px;
