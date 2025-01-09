@@ -76,7 +76,7 @@ body {
 
 .content.contact {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 45% 55%;
     gap: 30px;
     align-items: center;
     position: relative;
@@ -126,6 +126,11 @@ body {
     }
 }
 
+.title {
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
 .subtitle {
     font-family: 'Roboto', monospace;
     font-size: 48px;
@@ -172,7 +177,7 @@ body {
 }
 
 .img-magnifier-container img {
-    width: 300px;
+    width: 500px;
     height: auto;
 }
 
