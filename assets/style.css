@@ -136,7 +136,7 @@ body {
 
 .details {
     font-family: 'Roboto', sans-serif;
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 300;
     color: #333333;
     margin-inline-start: 25px;
@@ -169,8 +169,8 @@ body {
 .circular--portrait {
     position: relative;
     border-radius: 50px; /* round corners */
-    width: 800px;
-    height: 500px;
+    width: 400%;
+    height: 400%;
     overflow: hidden;
     padding-top: 5%;
     margin-inline-end: 20px;
