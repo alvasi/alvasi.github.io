@@ -68,6 +68,12 @@ body {
     align-items: center;
 }
 
+.content.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /* Polaroid effect */
 .polaroid {
     width: 300px;
@@ -81,7 +87,7 @@ body {
     padding-bottom: 60px; /* Extra white bit at the bottom */
     transform: translateX(-200%); /* Initial position off-screen */
     animation: slide-in 1s forwards; /* Slide in animation */
-    animation-delay: 2s; /* Delay slide in animation */
+    animation-delay: 1s; /* Delay slide in animation */
 }
 
 .polaroid-photo {
@@ -109,6 +115,14 @@ body {
     to {
         transform: translateX(0); /* Move to final position */
     }
+}
+
+.subtitle {
+    font-family: 'Roboto', monospace;
+    font-size: 48px;
+    font-weight: 300;
+    color: #888888;
+    margin-inline-start: 25px;
 }
 
 .intro-text p {

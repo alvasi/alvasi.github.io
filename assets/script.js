@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const text = "hello,<br>it's Alva!<br>welcome to my portfolio";
     let index = 0;
-    const speed = 100; // typing speed in milliseconds
+    const speed = 150; // typing speed in milliseconds
     const lastLineStart = text.lastIndexOf('<br>') + 4; // Find the start of the last line
 
     function typeWriter() {
