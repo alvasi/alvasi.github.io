@@ -8,7 +8,6 @@
     align-items: center;
     padding: 10px 20px; /* top, bottom 10px, left, right 20px */
     border-bottom: #333333 0.5px solid;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     z-index: 1000;
     overflow-x: auto; /* make topnav bar scrollable */
 }
@@ -60,6 +59,7 @@ body {
     grid-template-columns: 40% 60%;
     gap: 30px;
     align-items: center;
+    position: relative;
 }
 
 .content.tbc {
@@ -76,10 +76,11 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
     margin: 0 auto;
     text-align: center;
     padding-bottom: 60px; /* Extra white bit at the bottom */
+    transform: translateX(-100%); /* Initial position off-screen */
+    animation: slide-in 1s forwards; /* Slide in animation */
 }
 
 .polaroid-photo {
@@ -100,6 +101,12 @@ body {
 @keyframes develop {
     to {
         opacity: 1;
+    }
+}
+
+@keyframes slide-in {
+    to {
+        transform: translateX(0); /* Move to final position */
     }
 }
 
