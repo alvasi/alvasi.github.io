@@ -145,6 +145,7 @@ body {
     color: #333333;
     margin-inline-start: 25px;
     text-decoration: none;
+    line-height: 2;
 }
 
 .details a {
@@ -222,12 +223,6 @@ body {
         font-size: 36px; /* Adjust font size for medium screens */
         gap: 10px; /* Adjust gap for medium screens */
     }
-
-    .circular--portrait {
-        width: 400px;
-        height: 400px;
-        margin: 0 auto; /* Center the portrait */
-    }
 }
 
 /* Media query for smaller screens */
@@ -237,10 +232,14 @@ body {
         font-size: 32px; /* Adjust font size for smaller screens */
         text-align: center;
     }
+    .content.contact {
+        grid-template-columns: 1fr;
+    }
 
-    .circular--portrait {
-        width: 400px;
-        height: 400px;
-        margin: 0 auto; /* Center the portrait */
+    .img-magnifier-container img {
+        width: 500px;
+        height: auto;
+        filter: blur(6px);
+        -webkit-filter: blur(6px);
     }
 }
