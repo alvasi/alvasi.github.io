@@ -78,7 +78,6 @@ body {
     display: grid;
     grid-template-columns: 25% 75%;
     gap: 30px;
-    align-items: center;
     position: relative;
 }
 
@@ -177,7 +176,7 @@ body {
 }
 
 .img-magnifier-container img {
-    width: 500px;
+    width: 700px;
     height: auto;
 }
 
@@ -187,8 +186,8 @@ body {
   border-radius: 50%;
   cursor: none;
   /*Set the size of the magnifier glass:*/
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
 }
 
 .circular--portrait {
