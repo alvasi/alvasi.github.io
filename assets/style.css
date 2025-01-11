@@ -147,6 +147,10 @@ body {
     text-decoration: none;
 }
 
+.details a {
+    text-decoration: none;
+}
+
 .intro-text p {
     font-size: 48px;
     font-family: 'Roboto', monospace;
@@ -182,7 +186,7 @@ body {
 }
 
 .img-magnifier-glass {
-  position: absolute;x
+  position: absolute;
   border: 3px solid #000;
   border-radius: 50%;
   cursor: none;
