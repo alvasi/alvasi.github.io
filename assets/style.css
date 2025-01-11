@@ -144,6 +144,7 @@ body {
     font-weight: 300;
     color: #333333;
     margin-inline-start: 25px;
+    text-decoration: none;
 }
 
 .intro-text p {
@@ -181,7 +182,7 @@ body {
 }
 
 .img-magnifier-glass {
-  position: absolute;
+  position: absolute;x
   border: 3px solid #000;
   border-radius: 50%;
   cursor: none;
