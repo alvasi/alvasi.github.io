@@ -58,3 +58,11 @@ function magnify(imgID, zoom) {
       return {x : x, y : y};
     }
   }
+
+  function copyEmail() {
+    var copyText = document.getElementById("emailInput");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    document.execCommand("copy");
+    alert("Copied the email: " + copyText.value);
+}
