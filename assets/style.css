@@ -81,6 +81,12 @@ body {
     position: relative;
 }
 
+.content.highlights {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /* Polaroid effect */
 .polaroid {
     width: 300px;
@@ -219,6 +225,18 @@ body {
     width: 100%;
     height: auto;
 }
+
+.scroll-container {
+    width: 300px;
+    height: 150px;
+    overflow-y: scroll;
+  }
+  
+  .scroll-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
 
 /* Media query for medium screens */
 @media (max-width: 1024px) {
