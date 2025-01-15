@@ -236,7 +236,7 @@ body {
 .project {
     display: inline-block;
     width: 350px;
-    height: 430px;
+    height: 500px;
     margin-right: 20px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -260,7 +260,7 @@ body {
     font-family: 'Roboto', monospace;
     margin-top: 10px;
     font-size: 1.2em;
-    line-height: 2;
+    line-height: 1.5;
 }
 
 .project p {
