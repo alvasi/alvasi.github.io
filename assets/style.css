@@ -226,17 +226,44 @@ body {
     height: auto;
 }
 
-.scroll-container {
+.projects-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+    white-space: nowrap;
+    gap: 20px;
+}
+
+.project {
+    display: inline-block;
     width: 300px;
-    height: 150px;
-    overflow-y: scroll;
-  }
-  
-  .scroll-item {
+    margin-right: 20px;
     padding: 10px;
     border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.project img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.project h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.project p {
     margin-bottom: 10px;
-  }
+    color: #666;
+}
+
+.project:hover {
+    transform: scale(1.05);
+}
 
 /* Media query for medium screens */
 @media (max-width: 1024px) {
