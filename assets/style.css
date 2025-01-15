@@ -230,14 +230,13 @@ body {
     display: flex;
     overflow-x: auto;
     padding: 20px;
-    white-space: nowrap;
     gap: 20px;
 }
 
 .project {
     display: inline-block;
     width: 350px;
-    height: 550px;
+    height: 430px;
     margin-right: 20px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -245,7 +244,7 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-    overflow: hidden; /* Ensure content stays within the card */
+    overflow: break-word; /* Ensure content stays within the card */
 }
 
 .project img {
@@ -261,6 +260,7 @@ body {
     font-family: 'Roboto', monospace;
     margin-top: 10px;
     font-size: 1.2em;
+    line-height: 2;
 }
 
 .project p {
@@ -268,6 +268,7 @@ body {
     margin-bottom: 10px;
     color: #666;
     overflow-wrap: break-word; /* Ensure long words break to fit within the card */
+    line-height: 1.5;
 }
 
 .project:hover {
