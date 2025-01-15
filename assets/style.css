@@ -236,7 +236,8 @@ body {
 
 .project {
     display: inline-block;
-    width: 300px;
+    width: 350px;
+    height: 550px;
     margin-right: 20px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -252,11 +253,13 @@ body {
 }
 
 .project h3 {
+    font-family: 'Roboto', monospace;
     margin-top: 10px;
     font-size: 1.2em;
 }
 
 .project p {
+    font-family: 'Roboto', sans-serif;
     margin-bottom: 10px;
     color: #666;
 }
