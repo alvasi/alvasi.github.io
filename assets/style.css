@@ -245,11 +245,16 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
+    overflow: hidden; /* Ensure content stays within the card */
 }
 
 .project img {
     width: 100%;
     border-radius: 10px 10px 0 0;
+}
+
+.project-content {
+    padding: 10px; /* Add padding to the content */
 }
 
 .project h3 {
@@ -262,6 +267,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin-bottom: 10px;
     color: #666;
+    overflow-wrap: break-word; /* Ensure long words break to fit within the card */
 }
 
 .project:hover {
