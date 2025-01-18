@@ -74,6 +74,7 @@ body {
     justify-content: center;
 }
 
+
 .content.contact {
     display: grid;
     grid-template-columns: 25% 75%;
@@ -142,6 +143,15 @@ body {
     font-weight: 300;
     color: #888888;
     margin-inline-start: 25px;
+}
+
+.bio-content {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: #333333;
+    margin-inline-start: 25px;
+    line-height: 2;
 }
 
 .details {
