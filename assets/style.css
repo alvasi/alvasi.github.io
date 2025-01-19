@@ -1,5 +1,9 @@
 .burger-icon {
     display: none; /* hide by default */
+    top: 0;
+    width: 100%;
+    padding: 10px 20px;
+
 }
 
 .burger-icon img {
@@ -8,7 +12,7 @@
 }
 
 .burger-icon .icon {
-    margin-right: 5%;
+    margin-inline-end: 5%;
 }
 
 .burger-menu {

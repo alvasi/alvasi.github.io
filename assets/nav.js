@@ -5,4 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     burgerIcon.addEventListener('click', function() {
         burgerMenu.classList.toggle('show');
     });
+
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1024) {
+            burgerMenu.classList.remove('show');
+        }
+    });
 });
