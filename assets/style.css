@@ -222,12 +222,7 @@ body {
 }
 
 .doughnut {
-    width: 700px;
-}
-
-
-.doughnut img {
-    width: 700%;
+    width: 100px;
 }
 
 .intro-text p {
