@@ -221,8 +221,13 @@ body {
     color: #333333;
 }
 
-.doughnut img {
+.doughnut {
     width: 700px;
+}
+
+
+.doughnut img {
+    width: 700%;
 }
 
 .intro-text p {
