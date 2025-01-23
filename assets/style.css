@@ -108,6 +108,7 @@ body {
     gap: 30px;
     align-items: center;
     position: relative;
+    padding-top: 40px;
 }
 
 .content.tbc {
@@ -218,6 +219,10 @@ body {
 
 .details a:hover {
     color: #333333;
+}
+
+.doughnut img {
+    width: 700px;
 }
 
 .intro-text p {
