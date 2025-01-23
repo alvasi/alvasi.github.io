@@ -121,6 +121,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 
@@ -201,6 +202,11 @@ body {
     color: #333333;
     margin-inline-start: 25px;
     line-height: 2;
+    grid-template-columns: 70% 30%;
+}
+
+.bio-content img{
+    width: 600px;
 }
 
 .details {
@@ -219,10 +225,6 @@ body {
 
 .details a:hover {
     color: #333333;
-}
-
-.doughnut {
-    width: 100px;
 }
 
 .intro-text p {
