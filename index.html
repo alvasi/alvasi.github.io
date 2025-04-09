@@ -14,19 +14,19 @@
             <i class="fa-solid fa-bars fa-xl" style="color: #333333"></i>
         </div>
         <div id="burger-menu" class="burger-menu">
-            <a href="./">HOME</a>
-            <a href="./about">ABOUT</a>
-            <a href="./project">PROJECTS</a>
-            <a href="./contact">CONTACT</a>
+            <a href="#home">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="#projects">PROJECTS</a>
+            <a href="#contact">CONTACT</a>
         </div>
         <div class="topnav">
             <img src = "assets/logo.jpg" alt = "signature">
-            <a class="active" href="./">HOME</a>
-            <a href="./about">ABOUT</a>
-            <a href="./project">PROJECTS</a>
-            <a href="./contact">CONTACT</a>
+            <a class="active" href="#home">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="#projects">PROJECTS</a>
+            <a href="#contact">CONTACT</a>
         </div>
-        <div class="container">
+        <div id="home" class="container">
             <div class="content intro">
                 <div class="polaroid">
                     <div class="polaroid-photo">
@@ -37,14 +37,83 @@
                     <p id="intro-text"></p>
                 </div>
             </div>
-            <!-- <div class="content highlights">
-                <div class="subtitle">
-                    <p>highlights.</p>
+        </div>
+        <div id="about" class="container">
+            <div class="content about">
+                <div class="bio">
+                    <div class="subtitle">
+                        <p>bio.</p>
+                    </div>
+                    <div class="bio-content">
+                        <img src="assets/doughnut.png" alt="doughnut">
+                        <p>currently in need of a job to finance my sushi addiction.</p>
+                    </div>
                 </div>
-            </div> -->
+            </div>
+        </div>
+        <div id="projects" class="container">
+            <div class="content projects">
+                <div class="subtitle">
+                    <p>gallery.</p>
+                </div>
+                <div class="projects-container">
+                    <a href="https://github.com/alvasi/python-formatter" class="project-link">
+                        <div class="project">
+                            <img src="assets/python.png" alt="Python">
+                            <div class="project-content">
+                                <h3>Python Code Formatter</h3>
+                                <p>Developed a Python code formatter that automatically formats Python code to customisable standards.</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://github.com/alvasi/remix-contract-generator" class="project-link">
+                        <div class="project">
+                            <img src="assets/remix.png" alt="Remix IDE">
+                            <div class="project-content">
+                                <h3>A Smarter Smart Contract IDE (MSc)</h3>
+                                <p>Created a cost-efficient Remix chatbot plugin to help new developers write secure smart contracts.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="contact" class="container">
+            <div class="title">
+                <div class="subtitle">
+                    <p>info.</p>
+                </div>
+            </div>
+            <div class="content contact">
+                <div class="info">
+                    <div class="details">
+                        <p>
+                            <a href="https://www.linkedin.com/in/alva-si-2780781b1" target="_blank">
+                                <i class="fa-brands fa-linkedin fa-xl" style="color: #888888"></i>
+                            </a>
+                            LinkedIn
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-envelope fa-xl" onclick="copyEmail()" style="color: #888888; cursor: pointer;"></i>
+                            <input type="text" value="17siaw1@gmail.com" id="emailInput" style="position: absolute; left: -9999px;">
+                            Email
+                        </p>
+                        <p>
+                            <a href="https://github.com/alvasi" target="_blank" style="color: #888888">
+                                <i class="fa-brands fa-github fa-xl"></i>
+                            </a>
+                            GitHub
+                        </p>
+                    </div>
+                </div>
+                <div class="img-magnifier-container">
+                    <img id="myimage" src="assets/hk.png" width="750" height="500" alt="HK">
+                </div>
+            </div>
         </div>
         <script src="assets/script.js"></script>
         <script src="assets/nav.js"></script>
         <script src="https://kit.fontawesome.com/67165198e6.js" crossorigin="anonymous"></script>
+        <script>magnify("myimage", 2);</script>
     </body>
 </html>
