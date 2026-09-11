@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/*
+  Palette tokens — change hex here.
+  :root = light, [data-dark="true"] = the dark mapping of the same names.
+*/
+:root {
+  --p-canvas: #f9f6f1;
+  --p-ink: #2c2825;
+  --p-paper: #ffffff;
+  --p-muted: #f0ece5;
+  --p-muted-ink: #8a7f74;
+  --p-line: #e2dbd2;
+  --p-primary: #7b9e87;
+  --p-on-primary: #ffffff;
+  --p-accent: #b8a9d0;
+  --p-warm: #e8d5c4;
+  --p-coral: #e8a598;
+  --p-sunken: #e8d5c4;
+  --p-inverse: #080710;
+
+  --p-1: #c8ddd1;
+  --p-2: #f0d4d4;
+  --p-3: #fde8d0;
+  --p-4: #d4d0ed;
+
+  --p-blob-1: #c8ddd1;
+  --p-blob-2: #d4d0ed;
+  --p-blob-3: #fde8d0;
+  --p-blob-4: #f0d4d4;
+
+  --chip-1: var(--p-1);
+  --chip-2: var(--p-2);
+  --chip-3: var(--p-3);
+  --chip-4: var(--p-4);
+  --chip-border: transparent;
+
+  --nav-bg: color-mix(in srgb, var(--p-canvas) 92%, transparent);
+  --control-hover: color-mix(in srgb, var(--p-primary) 8%, transparent);
+  --timeline: color-mix(in srgb, var(--p-primary) 25%, transparent);
+  --scribble-opacity: 0.25;
+  --scribble-opacity-soft: 0.175;
+  --scribble-opacity-mid: 0.2;
+  --glow-mix: 0%;
+  --shadow: 0 1px 4px color-mix(in srgb, var(--p-ink) 5%, transparent);
+  --shadow-hover: 0 12px 32px color-mix(in srgb, var(--p-ink) 10%, transparent);
+  --scanline: transparent;
+
+  --background: var(--p-canvas);
+  --foreground: var(--p-ink);
+  --card: var(--p-paper);
+  --card-foreground: var(--p-ink);
+  --primary: var(--p-primary);
+  --primary-foreground: var(--p-on-primary);
+  --secondary: var(--p-sunken);
+  --secondary-foreground: var(--p-ink);
+  --muted: var(--p-muted);
+  --muted-foreground: var(--p-muted-ink);
+  --accent: var(--p-accent);
+  --accent-foreground: var(--p-ink);
+  --border: var(--p-line);
+  --ring: var(--p-primary);
+  --radius: 0.5rem;
+
+  --font-display: 'Lora', Georgia, serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+  --font-label-transform: none;
+  --font-label-spacing: 0.12em;
+  --heading-weight: 700;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-p-1: var(--p-1);
+  --color-p-2: var(--p-2);
+  --color-p-3: var(--p-3);
+  --color-p-4: var(--p-4);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+[data-dark="true"] {
+  --background: #080710;
+  --foreground: #e8e6f0;
+  --card: #0f0e1a;
+  --card-foreground: #e8e6f0;
+  --primary: #b09fff;
+  --primary-foreground: #080710;
+  --secondary: #1a1830;
+  --secondary-foreground: #e8e6f0;
+  --muted: #111020;
+  --muted-foreground: #6e6b8a;
+  --accent: #ff79c6;
+  --accent-foreground: #080710;
+  --border: #221f3a;
+  --ring: #b09fff;
+  --p-canvas: #080710;
+  --p-ink: #e8e6f0;
+  --p-paper: #0f0e1a;
+  --p-muted: #111020;
+  --p-muted-ink: #6e6b8a;
+  --p-line: #221f3a;
+  --p-primary: #b09fff;
+  --p-on-primary: #080710;
+  --p-accent: #ff79c6;
+  --p-warm: #fb923c;
+  --p-coral: #34d399;
+  --p-sunken: #1a1830;
+  --p-inverse: #f9f6f1;
+
+  --p-1: #7c6ff7;
+  --p-2: #ff79c6;
+  --p-3: #34d399;
+  --p-4: #fb923c;
+
+  --p-blob-1: #2e0d6e;
+  --p-blob-2: #5c0f4e;
+  --p-blob-3: #0d1f52;
+  --p-blob-4: #1a0d52;
+
+  --chip-1: color-mix(in srgb, var(--p-1) 22%, transparent);
+  --chip-2: color-mix(in srgb, var(--p-2) 22%, transparent);
+  --chip-3: color-mix(in srgb, var(--p-3) 18%, transparent);
+  --chip-4: color-mix(in srgb, var(--p-4) 18%, transparent);
+  --chip-border: color-mix(in srgb, var(--p-primary) 15%, transparent);
+
+  --nav-bg: color-mix(in srgb, var(--p-canvas) 90%, transparent);
+  --control-hover: color-mix(in srgb, var(--p-primary) 10%, transparent);
+  --timeline: color-mix(in srgb, var(--p-primary) 20%, transparent);
+  --scribble-opacity: 0.55;
+  --scribble-opacity-soft: 0.385;
+  --scribble-opacity-mid: 0.44;
+  --glow-mix: 33%;
+  --shadow: 0 2px 8px rgb(0 0 0 / 0.5);
+  --shadow-hover: 0 12px 40px rgb(0 0 0 / 0.7);
+  --scanline: rgb(0 0 0 / 0.06);
+  --accent-foreground: var(--p-canvas);
+
+  --font-display: 'Space Mono', monospace;
+  --font-body: 'JetBrains Mono', monospace;
+  --font-label-transform: uppercase;
+  --font-label-spacing: 0.18em;
+  --heading-weight: 700;
+}
+
+@keyframes mode-flash {
+  0%   { opacity: 0; }
+  30%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.mode-flash {
+  animation: mode-flash 0.35s ease forwards;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+[data-dark="true"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--scanline) 2px,
+    var(--scanline) 4px
+  );
+  z-index: 9999;
+}
+
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
