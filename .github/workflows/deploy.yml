@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./alva-portfolio # Tells GitHub to step into your subfolder first
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
@@ -16,6 +19,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+          cache-dependency-path: ./alva-portfolio/package-lock.json # Tells the cacher where to find the lockfile
       - name: Install dependencies
         run: npm ci
       - name: Build project
@@ -24,7 +28,8 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: ./dist
+          path: ./alva-portfolio/dist # Updates the upload path to target the folder's dist directory
+
 
   deploy:
     needs: build
@@ -39,7 +44,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }} # Fixed: Points to the step's dynamic output variable
+      url: ${{ steps.deployment.outputs.page_url }} # dynamic output variable
 
     steps:
       - name: Download artifact
