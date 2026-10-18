@@ -1,102 +1,17 @@
 import { useState, useRef, useEffect, type CSSProperties, type ReactNode } from "react"
-
-const paletteCycle = ["var(--p-1)", "var(--p-2)", "var(--p-3)", "var(--p-4)"]
-const chipCycle = ["var(--chip-1)", "var(--chip-2)", "var(--chip-3)", "var(--chip-4)"]
-
-const projects = [
-  {
-    name: "Morrow",
-    kind: "Group" as const,
-    description: "In progress. An iOS app that serves three curated digest articles each day, then uses AI conversations to prompt reflection and divert users away from endless scrolling.",
-    stack: ["Swift", "SwiftUI", "Python", "FastAPI"],
-    github: null,
-    live: "https://morrow-web-sable.vercel.app/",
-  },
-  {
-    name: "Task Manager",
-    kind: "Solo" as const,
-    description: "A full-stack task management app where users can create, update, and share tasks with others.",
-    stack: ["React", "Flask", "PostgreSQL"],
-    github: "https://github.com/alvasi/todolist",
-    live: null,
-  },
-  {
-    name: "A Smarter Smart Contract IDE",
-    kind: "Solo" as const,
-    description: "MSc individual project (79%): a security-focused Remix plugin that improved AI-generated smart-contract security by 67% versus the baseline co-pilot, at under USD 0.003 per run.",
-    stack: ["TypeScript", "React", "Smart Contracts"],
-    github: "https://github.com/alvasi/remix-contract-generator",
-    live: null,
-  },
-  {
-    name: "MoodSwings",
-    kind: "Group" as const,
-    description: "IC Hack 2024 Newcomers Runner-up. Recommends Spotify playlists from facial-expression mood detection and personal music preferences.",
-    stack: ["Web App", "Spotify API"],
-    github: null,
-    live: "https://devpost.com/software/moodswings",
-  },
-]
-
-const skills = [
-  "TypeScript", "React", "C#", ".NET", "Python", "SQL",
-  "Azure", "Docker", "PostgreSQL", "PyTorch", "Figma", "Git",
-]
-
-const experience = [
-  {
-    role: "Software Engineer Intern",
-    company: "SleekFlow",
-    period: "Apr 2026 — Present",
-    location: "Hong Kong",
-    about: "B2B SaaS for messaging and CRM, serving 7000+ customers.",
-    bullets: [
-      "Delivered 85 tickets across 12 two-week Scrum sprints on a React/TypeScript and C#/.NET stack.",
-      "Shipped 45+ tickets on team inbox, including in-chat search, saved replies v1 to v2 migration, and message list filters.",
-      "Liaised with customer support and senior engineers on 35+ production defects, shipping 5 as mid-sprint hot-fixes after tracing root causes in GCP/Azure logs, webhooks, and DevTools.",
-      "Served as sprint master and on-call technical support for two sprints, leading stand-ups, team meetings, and retrospectives.",
-      "Built a silent webhook-replay backfill that recovered inbound WhatsApp messages lost to an identity-index failure, preserving timestamps without firing automations.",
-    ],
-  },
-  {
-    role: "Data Engineer Intern (part-time)",
-    company: "Anlyvis",
-    period: "Jul 2025 — Sep 2025",
-    location: "Hong Kong",
-    about: "Edge AIoT computer-vision platform for real-time video analytics.",
-    bullets: [
-      "Raised computer-vision dataset quality by redesigning annotation protocols and curating training subsets, helping the model meet the client’s 90%+ accuracy requirement.",
-      "Automated data-ingestion pipelines in Python and wrote test suites for previously untested internal tools, reaching 100% coverage and resolving long-standing defects.",
-    ],
-  },
-  {
-    role: "Bioinformatics Summer Intern",
-    company: "The University of Hong Kong",
-    period: "Jul 2022 — Sep 2022",
-    location: "Hong Kong",
-    about: "Academic research in computational biology and genomics.",
-    bullets: [
-      "Engineered a convolutional neural network in PyTorch to model RNA transcription efficiency from genomic sequences, covering preprocessing, architecture design, and evaluation.",
-    ],
-  },
-]
-
-const education = [
-  {
-    degree: "MSc Computing",
-    school: "Imperial College London",
-    period: "Oct 2023 — Sep 2024",
-    note: "Distinction · Individual project 79% — security-focused smart-contract analysis plugin",
-  },
-  {
-    degree: "BSc Medical Biosciences with Management",
-    school: "Imperial College London",
-    period: "Oct 2019 — Jun 2023",
-    note: "First Class Honours · Dean's List (Management Year) · ICBS Best Group Project",
-  },
-]
-
-/* ── Utilities ──────────────────────────────────────────────── */
+import {
+  copy,
+  education,
+  experience,
+  links,
+  navItems,
+  nightBlobs,
+  paletteCycle,
+  projects,
+  skills,
+  voice,
+  type Project,
+} from "./content"
 
 function Reveal({
   children,
@@ -146,27 +61,6 @@ function Reveal({
   )
 }
 
-function Label({ dark, children, className }: { dark?: boolean; children: string; className?: string }) {
-  return (
-    <p
-      className={className}
-      style={{
-        fontFamily: "var(--font-body)",
-        fontSize: "0.85rem",
-        fontWeight: 500,
-        letterSpacing: dark ? "0.2em" : "0.12em",
-        textTransform: dark ? "uppercase" : "none",
-        color: "var(--muted-foreground)",
-        marginBottom: className ? undefined : "1.5rem",
-      }}
-    >
-      {children}
-    </p>
-  )
-}
-
-/* ── Theme toggle icon ──────────────────────────────────────── */
-
 function ThemeIcon({ dark }: { dark: boolean }) {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -182,8 +76,6 @@ function ThemeIcon({ dark }: { dark: boolean }) {
   )
 }
 
-/* ── Nav ────────────────────────────────────────────────────── */
-
 function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void; cueNight: boolean }) {
   const [scrolled, setScrolled] = useState(false)
 
@@ -197,207 +89,87 @@ function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void
   return (
     <nav className={`site-nav${scrolled ? " is-scrolled" : ""}`}>
       <div className="site-nav-inner">
-      <span style={{
-        fontFamily: "var(--font-display)",
-        fontWeight: 500,
-        fontSize: "1.15rem",
-        color: "var(--foreground)",
-        transition: "all 0.4s ease",
-        whiteSpace: "nowrap",
-      }}>
-        {dark ? "Alva, after hours" : "Alva Si"}
-      </span>
-      <div className="site-nav-links">
-        {["About", "Projects", "Resume", "Contact"].map((label) => (
-          <a
-            key={label}
-            href={`#${label.toLowerCase()}`}
-            style={{
-              fontSize: "0.9rem",
-              fontWeight: 500,
-              fontFamily: "var(--font-body)",
-              color: "var(--muted-foreground)",
-              textDecoration: "none",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--primary)")}
-            onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--muted-foreground)")}
-          >
-            {label}
-          </a>
-        ))}
-        <span style={{ display: "inline-flex", alignItems: "center", gap: "0.55rem" }}>
-          {cueNight && !dark && <span className="night-cue-label">Night →</span>}
-          <button
-            className={`theme-toggle${cueNight && !dark ? " is-cue" : ""}`}
-            onClick={onToggle}
-            aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            <ThemeIcon dark={dark} />
-          </button>
-        </span>
-      </div>
+        <span className="nav-brand">{voice(dark, copy.brand.light, copy.brand.dark)}</span>
+        <div className="site-nav-links">
+          {navItems.map((label) => (
+            <a key={label} href={`#${label.toLowerCase()}`} className="nav-link">
+              {label}
+            </a>
+          ))}
+          <span className="theme-toggle-wrap">
+            {cueNight && !dark && <span className="night-cue-label">{copy.nightCue}</span>}
+            <button
+              className={`theme-toggle${cueNight && !dark ? " is-cue" : ""}`}
+              onClick={onToggle}
+              aria-label={voice(dark, copy.themeAria.light, copy.themeAria.dark)}
+            >
+              <ThemeIcon dark={dark} />
+            </button>
+          </span>
+        </div>
       </div>
     </nav>
   )
 }
 
-/* ── Blob ───────────────────────────────────────────────────── */
-
-function Blob({ x, y, size, color, blur, className = "" }: { x: string; y: string; size: string; color: string; blur: string; className?: string }) {
-  return (
-    <div
-      className={className}
-      style={{
-        position: "absolute", left: x, top: y, width: size, height: size,
-        borderRadius: "60% 40% 55% 45% / 50% 60% 40% 50%",
-        backgroundColor: color, filter: `blur(${blur})`, opacity: 0.55,
-        pointerEvents: "none", transition: "background-color 0.6s ease",
-      }}
-    />
-  )
-}
-
-/* ── Hero ───────────────────────────────────────────────────── */
-
 function Hero({ dark }: { dark: boolean }) {
-  const blobs = dark
-    ? [
-        { x: "62%", y: "8%", size: "420px", color: "var(--p-blob-1)", blur: "100px" },
-        { x: "6%", y: "58%", size: "280px", color: "var(--p-blob-3)", blur: "90px" },
-      ]
-    : []
-
   return (
     <section id="hero" className="site-section-hero">
-      {blobs.map((b, i) => <Blob key={i} {...b} />)}
+      {dark && nightBlobs.map((blob) => (
+        <div
+          key={`${blob.x}-${blob.y}`}
+          className="blob"
+          style={{
+            left: blob.x,
+            top: blob.y,
+            width: blob.size,
+            height: blob.size,
+            backgroundColor: blob.color,
+            filter: `blur(${blob.blur})`,
+          }}
+        />
+      ))}
 
       <div className="site-wrap hero-in">
-        <Label dark={dark} className="hero-eyebrow">Software engineer · Hong Kong</Label>
-
-        <h1
-          className="hero-title"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: dark ? "clamp(3rem, 7vw, 5.5rem)" : "inherit",
-            lineHeight: dark ? 1.12 : 1,
-            fontWeight: 500,
-            letterSpacing: "-0.02em",
-            color: "var(--foreground)",
-          }}
-        >
+        <p className="eyebrow hero-eyebrow">{copy.eyebrow}</p>
+        <h1 className="hero-title">
           {dark ? (
             <>
-              Salutations,<br />
-              <em className="hero-name">Alva here.</em>
+              {copy.heroKickerDark}<br />
+              <em className="hero-name">{copy.heroName.dark}</em>
             </>
           ) : (
             <>
-              <span className="hero-kicker">Hello, I&apos;m</span>
-              <em className="hero-name">Alva.</em>
+              <span className="hero-kicker">{copy.heroKickerLight}</span>
+              <em className="hero-name">{copy.heroName.light}</em>
             </>
           )}
         </h1>
-
-        <p
-          className="hero-lede"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "clamp(1rem, 2vw, 1rem)",
-            lineHeight: 1.85,
-            color: "var(--muted-foreground)",
-          }}
-        >
-          {dark
-            ? "SWE intern in Hong Kong. Same work — said more plainly."
-            : "Currently a software engineer intern in Hong Kong. I want to build my career in a fast-paced environment where I am constantly challenged to grow. For me, work is fulfilling when I make a positive impact, and it’s fun when I get to solve difficult problems alongside a great team."}
-            </p>
-
-        <a
-          href="#projects"
-          style={{
-            display: "inline-block",
-            padding: "0.875rem 2rem",
-            backgroundColor: "var(--primary)",
-            color: "var(--primary-foreground)",
-            fontFamily: "var(--font-body)",
-            fontWeight: 500,
-            fontSize: "0.95rem",
-            borderRadius: "var(--radius)",
-            textDecoration: "none",
-            transition: "opacity 0.2s, transform 0.2s, background-color 0.4s ease",
-          }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget
-            el.style.opacity = "0.85"
-            el.style.transform = "translateY(-1px)"
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget
-            el.style.opacity = "1"
-            el.style.transform = "translateY(0)"
-          }}
-        >
-          {dark ? "View the work" : "See my work"}
+        <p className="hero-lede">{voice(dark, copy.heroLede.light, copy.heroLede.dark)}</p>
+        <a href="#projects" className="btn btn-fill">
+          {voice(dark, copy.heroCta.light, copy.heroCta.dark)}
         </a>
       </div>
     </section>
   )
 }
 
-/* ── About ──────────────────────────────────────────────────── */
-
 function About({ dark }: { dark: boolean }) {
   return (
-    <section id="about" className="site-section" style={{ borderTop: "1px solid var(--border)" }}>
+    <section id="about" className="site-section section-rule">
       <div className="site-wrap about-grid">
         <Reveal>
-          <h2 className="section-title" style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "2.25rem",
-            fontWeight: 500,
-            color: "var(--foreground)",
-            marginBottom: "1.5rem",
-          }}>
-            {dark ? "About" : "A bit about me"}
+          <h2 className="section-title" style={{ marginBottom: "1.5rem" }}>
+            {voice(dark, copy.aboutTitle.light, copy.aboutTitle.dark)}
           </h2>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.85, color: "var(--muted-foreground)", marginBottom: "1rem" }}>
-            {dark
-              ? "Biomedicine first, management next, then computing. Now working full-stack with React and C#/.NET. Vibing with LLMs to maximise productivity. Avid fan of pretty UI."
-              : "I started in medical biosciences with management and ended up in computing. Working full-stack with React and C#/.NET, I prioritise rapid translation from idea to working software. I focus on writing clear logic and orchestrating clean integrations across the backend and frontend."}
-          </p>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.85, color: "var(--muted-foreground)" }}>
-            {dark
-              ? "Outside work: nails, sushi, pilates, concerts, and games."
-              : "When I’m not at a keyboard I’m usually doing my nails, getting sushi, or at pilates."}
-          </p>
+          <p className="copy">{voice(dark, copy.aboutP1.light, copy.aboutP1.dark)}</p>
+          <p className="copy">{voice(dark, copy.aboutP2.light, copy.aboutP2.dark)}</p>
         </Reveal>
         <Reveal delay={120}>
-          <h3 style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "0.72rem",
-            fontWeight: 600,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "var(--muted-foreground)",
-            marginBottom: "1.25rem",
-          }}>
-            {dark ? "What I use" : "Skills & tools"}
-          </h3>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-            {skills.map((skill, i) => (
-              <span key={skill} className="skill-chip" style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "0.85rem",
-                fontWeight: 500,
-                padding: "0.35rem 0.85rem",
-                borderRadius: "999px",
-                backgroundColor: chipCycle[i % 4],
-                color: "var(--foreground)",
-                border: "1px solid var(--chip-border)",
-              }}>
-                {skill}
-              </span>
+          <h3 className="kicker kicker-skills">{voice(dark, copy.skillsTitle.light, copy.skillsTitle.dark)}</h3>
+          <div className="chip-row">
+            {skills.map((skill) => (
+              <span key={skill} className="skill-chip">{skill}</span>
             ))}
           </div>
         </Reveal>
@@ -406,68 +178,29 @@ function About({ dark }: { dark: boolean }) {
   )
 }
 
-/* ── Project card ───────────────────────────────────────────── */
-
-function ProjectCard({ project, accent, dark }: { project: typeof projects[0]; accent: string; dark: boolean }) {
-  const [hovered, setHovered] = useState(false)
-
+function ProjectCard({ project, accent }: { project: Project; accent: string }) {
   return (
-    <article
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        backgroundColor: "var(--card)",
-        borderRadius: "var(--radius)",
-        border: "1px solid var(--border)",
-        overflow: "hidden",
-        transition: "transform 0.2s, box-shadow 0.2s, border-color 0.2s",
-        transform: dark && hovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: dark ? (hovered ? "var(--shadow-hover)" : "var(--shadow)") : "none",
-        borderColor: !dark && hovered ? "var(--foreground)" : "var(--border)",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div style={{ height: dark ? "6px" : "1px", backgroundColor: dark ? accent : "var(--border)" }} />
-      <div style={{ padding: "1.75rem", flex: 1, display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "0.75rem", marginBottom: "0.65rem" }}>
-          <h3 style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "1.25rem",
-            fontWeight: 500,
-            color: dark ? accent : "var(--foreground)",
-            margin: 0,
-          }}>
-            {project.name}
-          </h3>
+    <article className="project-card" style={{ ["--card-accent" as string]: accent }}>
+      <div className="project-card-bar" />
+      <div className="project-card-body">
+        <div className="project-card-head">
+          <h3 className="project-card-title">{project.name}</h3>
           <span className="project-kind">{project.kind}</span>
         </div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", lineHeight: 1.75, color: "var(--muted-foreground)", marginBottom: "1.25rem", flex: 1 }}>
-          {project.description}
-        </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.25rem" }}>
-          {project.stack.map((t) => (
-            <span key={t} style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "0.75rem",
-              fontWeight: 500,
-              padding: "0.2rem 0.6rem",
-              borderRadius: "4px",
-              backgroundColor: "var(--muted)",
-              color: "var(--muted-foreground)",
-            }}>
-              {t}
-            </span>
+        <p className="project-card-desc">{project.description}</p>
+        <div className="stack-row">
+          {project.stack.map((item) => (
+            <span key={item} className="stack-chip">{item}</span>
           ))}
         </div>
-        <div style={{ display: "flex", gap: "1rem" }}>
+        <div className="project-links">
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", fontWeight: 500, color: "var(--primary)", textDecoration: "none" }}>
+            <a href={project.github} target="_blank" rel="noopener noreferrer" data-kind="github">
               GitHub ↗
             </a>
           )}
           {project.live && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", fontWeight: 500, color: "var(--muted-foreground)", textDecoration: "none" }}>
+            <a href={project.live} target="_blank" rel="noopener noreferrer" data-kind="live">
               Live ↗
             </a>
           )}
@@ -477,24 +210,18 @@ function ProjectCard({ project, accent, dark }: { project: typeof projects[0]; a
   )
 }
 
-/* ── Projects ───────────────────────────────────────────────── */
-
 function Projects({ dark }: { dark: boolean }) {
   return (
-    <section id="projects" className="site-section" style={{ borderTop: "1px solid var(--border)", backgroundColor: "var(--background)" }}>
+    <section id="projects" className="site-section section-rule">
       <div className="site-wrap">
         <Reveal>
-          <h2 className="section-title" style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", fontWeight: 500, color: "var(--foreground)" }}>
-            {dark ? "What I've been building" : "Selected projects"}
-          </h2>
-          <p className="section-intro" style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--muted-foreground)" }}>
-            {dark ? "A few things I’ve shipped — one is still in progress." : "A few things I’ve made — including one still in progress."}
-          </p>
+          <h2 className="section-title">{voice(dark, copy.projectsTitle.light, copy.projectsTitle.dark)}</h2>
+          <p className="section-intro">{voice(dark, copy.projectsIntro.light, copy.projectsIntro.dark)}</p>
         </Reveal>
         <div className="project-grid reveal-stagger">
-          {projects.map((p, i) => (
-            <Reveal key={p.name}>
-              <ProjectCard project={p} accent={paletteCycle[i % 4]} dark={dark} />
+          {projects.map((project, i) => (
+            <Reveal key={project.name}>
+              <ProjectCard project={project} accent={paletteCycle[i % 4]} />
             </Reveal>
           ))}
         </div>
@@ -503,72 +230,43 @@ function Projects({ dark }: { dark: boolean }) {
   )
 }
 
-/* ── Resume ─────────────────────────────────────────────────── */
-
 function Resume({ dark }: { dark: boolean }) {
   return (
-    <section id="resume" className="site-section site-section-muted" style={{ borderTop: "1px solid var(--border)" }}>
+    <section id="resume" className="site-section site-section-muted section-rule">
       <div className="site-wrap">
-        <Reveal className="section-intro" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+        <Reveal className="section-intro resume-head">
           <div>
-            <h2 className="section-title" style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", fontWeight: 500, color: "var(--foreground)" }}>
-              {dark ? "Experience" : "Resume"}
-            </h2>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--muted-foreground)" }}>
-              {dark ? "Messaging SaaS, computer vision, bioinformatics." : "Messaging SaaS, computer vision, and a bioinformatics lab."}
-            </p>
+            <h2 className="section-title">{voice(dark, copy.resumeTitle.light, copy.resumeTitle.dark)}</h2>
+            <p className="copy">{voice(dark, copy.resumeIntro.light, copy.resumeIntro.dark)}</p>
           </div>
-          <a href="/Alva_Si_CV.pdf" target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "0.875rem",
-            fontWeight: 500,
-            padding: "0.6rem 1.25rem",
-            borderRadius: "var(--radius)",
-            border: "1px solid var(--primary)",
-            color: "var(--primary)",
-            textDecoration: "none",
-            transition: "background-color 0.2s, color 0.2s",
-            whiteSpace: "nowrap",
-          }}
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--primary)"; e.currentTarget.style.color = "var(--primary-foreground)" }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "var(--primary)" }}
-          >
-            {dark ? "Download PDF ↓" : "Download PDF ↓"}
+          <a href={links.cv} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+            {copy.resumePdf}
           </a>
         </Reveal>
 
         <Reveal>
-          <h3 style={{ fontFamily: "var(--font-body)", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--muted-foreground)", marginBottom: "2rem" }}>
-            Experience
-          </h3>
+          <h3 className="kicker kicker-experience">{copy.experienceHeading}</h3>
         </Reveal>
 
-        <div className="timeline-stack" style={{ position: "relative", paddingLeft: "2rem" }}>
-          <div style={{ position: "absolute", left: "6px", top: "6px", bottom: "6px", width: "1px", backgroundColor: "var(--timeline)" }} />
+        <div className="timeline-stack">
+          <div className="timeline-line" />
           {experience.map((job, i) => (
-            <Reveal key={i} delay={i * 80} style={{ position: "relative" }}>
-              <div style={{ position: "absolute", left: "-1.75rem", top: "6px", width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "var(--primary)" }} />
-              <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "0.25rem", marginBottom: "0.35rem" }}>
+            <Reveal key={job.company} delay={i * 80} className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="entry-head entry-head-job">
                 <div>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 500, color: "var(--foreground)" }}>{job.role}</span>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--primary)", marginLeft: "0.5rem" }}>· {job.company}</span>
+                  <span className="entry-title">{job.role}</span>
+                  <span className="entry-org">· {job.company}</span>
                 </div>
-                <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", color: "var(--muted-foreground)" }}>{job.location}</span>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", color: "var(--muted-foreground)", opacity: 0.7 }}>{job.period}</span>
+                <div className="entry-meta">
+                  <span>{job.location}</span>
+                  <span className="entry-period">{job.period}</span>
                 </div>
               </div>
-              {job.about && (
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", lineHeight: 1.7, color: "var(--muted-foreground)", margin: "0.35rem 0 0.5rem", fontStyle: "italic" }}>
-                  {job.about}
-                </p>
-              )}
-              <ul style={{ margin: "0.25rem 0 0", padding: 0, listStyle: "none" }}>
-                {job.bullets.map((b, j) => (
-                  <li key={j} style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", lineHeight: 1.75, color: "var(--muted-foreground)", paddingLeft: "1rem", position: "relative", marginBottom: "0.25rem" }}>
-                    <span style={{ position: "absolute", left: 0, color: "var(--primary)" }}>–</span>
-                    {b}
-                  </li>
+              {job.about && <p className="entry-about">{job.about}</p>}
+              <ul className="entry-list">
+                {job.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
                 ))}
               </ul>
             </Reveal>
@@ -576,24 +274,22 @@ function Resume({ dark }: { dark: boolean }) {
         </div>
 
         <Reveal>
-          <h3 style={{ fontFamily: "var(--font-body)", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--muted-foreground)", margin: "3.5rem 0 2rem" }}>
-            Education
-          </h3>
+          <h3 className="kicker kicker-education">{copy.educationHeading}</h3>
         </Reveal>
 
-        <div className="timeline-stack" style={{ position: "relative", paddingLeft: "2rem" }}>
-          <div style={{ position: "absolute", left: "6px", top: "6px", bottom: "6px", width: "1px", backgroundColor: "var(--timeline)" }} />
+        <div className="timeline-stack">
+          <div className="timeline-line" />
           {education.map((ed, i) => (
-            <Reveal key={i} delay={i * 80} style={{ position: "relative" }}>
-              <div style={{ position: "absolute", left: "-1.75rem", top: "6px", width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "var(--primary)" }} />
-              <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "0.25rem" }}>
+            <Reveal key={ed.degree} delay={i * 80} className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="entry-head">
                 <div>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 500, color: "var(--foreground)" }}>{ed.degree}</span>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--primary)", marginLeft: "0.5rem" }}>· {ed.school}</span>
+                  <span className="entry-title">{ed.degree}</span>
+                  <span className="entry-org">· {ed.school}</span>
                 </div>
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", color: "var(--muted-foreground)", opacity: 0.7 }}>{ed.period}</span>
+                <span className="entry-period">{ed.period}</span>
               </div>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "var(--muted-foreground)", marginTop: "0.4rem" }}>{ed.note}</p>
+              <p className="entry-note">{ed.note}</p>
             </Reveal>
           ))}
         </div>
@@ -602,42 +298,24 @@ function Resume({ dark }: { dark: boolean }) {
   )
 }
 
-/* ── Contact ────────────────────────────────────────────────── */
-
 function Contact({ dark }: { dark: boolean }) {
   return (
-    <footer id="contact" className="site-section" style={{ borderTop: "1px solid var(--border)", textAlign: "center" }}>
+    <footer id="contact" className="site-section section-rule contact-section">
       <div className="site-wrap">
         <Reveal>
-          <h2 className="section-title" style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", fontWeight: 500, color: "var(--foreground)" }}>
-            {dark ? "Get in touch" : "Contact me"}
-          </h2>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--muted-foreground)", maxWidth: "420px", margin: "0 auto 2rem" }}>
-            {dark
-              ? "Work or a project - email is best."
-              : "Happy to talk about work or a project."}
-          </p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", flexWrap: "wrap" }}>
-            <a href="mailto:wsalvas02@gmail.com" style={{ fontFamily: "var(--font-body)", fontSize: "1rem", fontWeight: 500, color: "var(--primary)", textDecoration: "none", borderBottom: "1px solid var(--primary)", paddingBottom: "1px" }}>
-              wsalvas02@gmail.com
-            </a>
-            <a href="https://github.com/alvasi" target="_blank" rel="noopener noreferrer" style={{ color: "var(--muted-foreground)", textDecoration: "none", fontSize: "0.95rem", fontFamily: "var(--font-body)", fontWeight: 500 }}>
-              GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/alva-si-2780781b1" target="_blank" rel="noopener noreferrer" style={{ color: "var(--muted-foreground)", textDecoration: "none", fontSize: "0.95rem", fontFamily: "var(--font-body)", fontWeight: 500 }}>
-              LinkedIn
-            </a>
+          <h2 className="section-title">{voice(dark, copy.contactTitle.light, copy.contactTitle.dark)}</h2>
+          <p className="copy contact-lede">{voice(dark, copy.contactLede.light, copy.contactLede.dark)}</p>
+          <div className="contact-links">
+            <a href={links.email} className="contact-email">{links.emailLabel}</a>
+            <a href={links.github} target="_blank" rel="noopener noreferrer" className="contact-social">GitHub</a>
+            <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="contact-social">LinkedIn</a>
           </div>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", color: "var(--muted-foreground)", marginTop: "4rem", opacity: 0.5 }}>
-            © 2026 Alva Si
-          </p>
+          <p className="copyright">{copy.copyright}</p>
         </Reveal>
       </div>
     </footer>
   )
 }
-
-/* ── App ────────────────────────────────────────────────────── */
 
 export default function App() {
   const [dark, setDark] = useState(false)
@@ -665,13 +343,9 @@ export default function App() {
     return () => io.disconnect()
   }, [dark])
 
-  function handleToggle() {
-    setDark((d) => !d)
-  }
-
   return (
     <div className="site-root" data-dark={dark}>
-      <Nav dark={dark} onToggle={handleToggle} cueNight={cueNight} />
+      <Nav dark={dark} onToggle={() => setDark((d) => !d)} cueNight={cueNight} />
       <main>
         <Hero dark={dark} />
         <About dark={dark} />
