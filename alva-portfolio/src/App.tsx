@@ -79,6 +79,7 @@ function ThemeIcon({ dark }: { dark: boolean }) {
 
 function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void; cueNight: boolean }) {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -87,16 +88,39 @@ function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false)
+    }
+    const onResize = () => {
+      if (window.matchMedia("(min-width: 901px)").matches) setMenuOpen(false)
+    }
+    window.addEventListener("keydown", onKey)
+    window.addEventListener("resize", onResize)
+    return () => {
+      window.removeEventListener("keydown", onKey)
+      window.removeEventListener("resize", onResize)
+    }
+  }, [menuOpen])
+
   return (
-    <nav className={`site-nav${scrolled ? " is-scrolled" : ""}`}>
+    <nav className={`site-nav${scrolled ? " is-scrolled" : ""}${menuOpen ? " is-open" : ""}`}>
       <div className="site-nav-inner">
         <span className="nav-brand">{voice(dark, copy.brand.light, copy.brand.dark)}</span>
-        <div className="site-nav-links">
+        <div id="site-nav-menu" className={`site-nav-links${menuOpen ? " is-open" : ""}`}>
           {navItems.map((label) => (
-            <a key={label} href={`#${label.toLowerCase()}`} className="nav-link">
+            <a
+              key={label}
+              href={`#${label.toLowerCase()}`}
+              className="nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
               {label}
             </a>
           ))}
+        </div>
+        <div className="site-nav-actions">
           <span className="theme-toggle-wrap">
             {cueNight && !dark && <span className="night-cue-label">{copy.nightCue}</span>}
             <button
@@ -107,6 +131,18 @@ function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void
               <ThemeIcon dark={dark} />
             </button>
           </span>
+          <button
+            type="button"
+            className="nav-burger"
+            aria-expanded={menuOpen}
+            aria-controls="site-nav-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
       </div>
     </nav>
@@ -326,6 +362,7 @@ function Contact({ dark }: { dark: boolean }) {
 }
 
 const THEME_KEY = "alva-theme"
+const CANVAS = { light: "#f7f6f3", night: "#070910" }
 
 function storedNight() {
   try {
@@ -335,14 +372,24 @@ function storedNight() {
   }
 }
 
+function applyChrome(dark: boolean) {
+  const canvas = dark ? CANVAS.night : CANVAS.light
+  const root = document.documentElement
+  if (dark) root.setAttribute("data-dark", "true")
+  else root.removeAttribute("data-dark")
+  root.style.backgroundColor = canvas
+  root.style.colorScheme = dark ? "dark" : "light"
+  document.body.style.backgroundColor = canvas
+  const theme = document.querySelector('meta[name="theme-color"]')
+  if (theme) theme.setAttribute("content", canvas)
+}
+
 export default function App() {
   const [dark, setDark] = useState(storedNight)
   const [cueNight, setCueNight] = useState(false)
 
   useEffect(() => {
-    const root = document.documentElement
-    if (dark) root.setAttribute("data-dark", "true")
-    else root.removeAttribute("data-dark")
+    applyChrome(dark)
     try {
       localStorage.setItem(THEME_KEY, dark ? "night" : "light")
     } catch {

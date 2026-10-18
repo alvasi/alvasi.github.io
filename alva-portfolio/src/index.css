@@ -4,14 +4,16 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
   background-color: var(--p-canvas);
 }
 
 html {
-  scroll-padding-top: 4.75rem;
+  scroll-padding-top: calc(4.75rem + env(safe-area-inset-top, 0px));
   scroll-behavior: smooth;
   color-scheme: light;
+  background-color: var(--p-canvas);
   transition: background-color 0.7s ease;
 }
 
@@ -261,28 +263,85 @@ body {
 .site-nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   width: 100%;
-  min-height: var(--nav-height);
-  padding: 0.85rem 2rem;
-}
-
-.site-nav-links {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 2rem;
+  min-height: calc(var(--nav-height) + env(safe-area-inset-top, 0px));
+  padding: calc(0.85rem + env(safe-area-inset-top, 0px)) 2rem 0.85rem;
 }
 
 .nav-brand {
+  margin-right: auto;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 1.15rem;
   color: var(--foreground);
   transition: color 0.4s ease;
   white-space: nowrap;
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.site-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.nav-burger {
+  display: none;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-burger:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.nav-burger span {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  height: 1.15px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.22s ease, opacity 0.22s ease, top 0.22s ease;
+}
+
+.nav-burger span:nth-child(1) { top: 12px; }
+.nav-burger span:nth-child(2) { top: 16.5px; }
+.nav-burger span:nth-child(3) { top: 21px; }
+
+.site-nav.is-open .nav-burger {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.site-nav.is-open .nav-burger span:nth-child(1) {
+  top: 16.5px;
+  transform: rotate(45deg);
+}
+
+.site-nav.is-open .nav-burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-nav.is-open .nav-burger span:nth-child(3) {
+  top: 16.5px;
+  transform: rotate(-45deg);
 }
 
 .nav-link {
@@ -380,7 +439,7 @@ main {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: calc(var(--nav-height) + 5.5rem);
+  padding-top: calc(var(--nav-height) + env(safe-area-inset-top, 0px) + 5.5rem);
   padding-bottom: 7rem;
   position: relative;
   overflow: hidden;
@@ -918,10 +977,6 @@ html:not([data-dark="true"]) .project-card:hover {
   .project-grid {
     grid-template-columns: 1fr;
   }
-
-  .site-nav-links {
-    gap: 0.5rem 0.9rem;
-  }
 }
 
 @keyframes rise-in {
@@ -1099,6 +1154,44 @@ html:not([data-dark="true"]) .project-card:hover {
   .aquarius-reveal {
     max-width: 280px;
   }
+
+  .site-nav-inner {
+    padding-inline: var(--page-pad-x);
+  }
+
+  .nav-burger {
+    display: block;
+  }
+
+  .night-cue-label {
+    display: none;
+  }
+
+  .site-nav-links {
+    display: none;
+    position: absolute;
+    inset: 100% 0 auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.35rem var(--page-pad-x) 1.15rem;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-nav-links.is-open {
+    display: flex;
+  }
+
+  .site-nav-links .nav-link {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-nav-links .nav-link:last-child {
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1120,7 +1213,8 @@ html:not([data-dark="true"]) .project-card:hover {
   .light-orb,
   .aquarius-node,
   .aquarius-shadow,
-  .aquarius-line {
+  .aquarius-line,
+  .nav-burger span {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
