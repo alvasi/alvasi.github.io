@@ -6,13 +6,15 @@ const chipCycle = ["var(--chip-1)", "var(--chip-2)", "var(--chip-3)", "var(--chi
 const projects = [
   {
     name: "Morrow",
-    description: "In progress. An iOS app that serves at most three curated Digests a day, then uses Bounce AI conversations to prompt reflection instead of endless scrolling.",
+    kind: "Group" as const,
+    description: "In progress. An iOS app that serves three curated digest articles each day, then uses AI conversations to prompt reflection and divert users away from endless scrolling.",
     stack: ["Swift", "SwiftUI", "Python", "FastAPI"],
     github: null,
-    live: "https://morrowapp.framer.website/",
+    live: "https://morrow-web-sable.vercel.app/",
   },
   {
     name: "Task Manager",
+    kind: "Solo" as const,
     description: "A full-stack task management app where users can create, update, and share tasks with others.",
     stack: ["React", "Flask", "PostgreSQL"],
     github: "https://github.com/alvasi/todolist",
@@ -20,6 +22,7 @@ const projects = [
   },
   {
     name: "A Smarter Smart Contract IDE",
+    kind: "Solo" as const,
     description: "MSc individual project (79%): a security-focused Remix plugin that improved AI-generated smart-contract security by 67% versus the baseline co-pilot, at under USD 0.003 per run.",
     stack: ["TypeScript", "React", "Smart Contracts"],
     github: "https://github.com/alvasi/remix-contract-generator",
@@ -27,6 +30,7 @@ const projects = [
   },
   {
     name: "MoodSwings",
+    kind: "Group" as const,
     description: "IC Hack 2024 Newcomers Runner-up. Recommends Spotify playlists from facial-expression mood detection and personal music preferences.",
     stack: ["Web App", "Spotify API"],
     github: null,
@@ -142,17 +146,20 @@ function Reveal({
   )
 }
 
-function Label({ dark, children }: { dark?: boolean; children: string }) {
+function Label({ dark, children, className }: { dark?: boolean; children: string; className?: string }) {
   return (
-    <p style={{
-      fontFamily: "var(--font-body)",
-      fontSize: "0.85rem",
-      fontWeight: 500,
-      letterSpacing: dark ? "0.2em" : "0.12em",
-      textTransform: dark ? "uppercase" : "none",
-      color: "var(--muted-foreground)",
-      marginBottom: "1.5rem",
-    }}>
+    <p
+      className={className}
+      style={{
+        fontFamily: "var(--font-body)",
+        fontSize: "0.85rem",
+        fontWeight: 500,
+        letterSpacing: dark ? "0.2em" : "0.12em",
+        textTransform: dark ? "uppercase" : "none",
+        color: "var(--muted-foreground)",
+        marginBottom: className ? undefined : "1.5rem",
+      }}
+    >
       {children}
     </p>
   )
@@ -237,66 +244,74 @@ function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void
 
 /* ── Blob ───────────────────────────────────────────────────── */
 
-function Blob({ x, y, size, color, blur }: { x: string; y: string; size: string; color: string; blur: string }) {
+function Blob({ x, y, size, color, blur, className = "" }: { x: string; y: string; size: string; color: string; blur: string; className?: string }) {
   return (
-    <div style={{
-      position: "absolute", left: x, top: y, width: size, height: size,
-      borderRadius: "60% 40% 55% 45% / 50% 60% 40% 50%",
-      backgroundColor: color, filter: `blur(${blur})`, opacity: 0.4,
-      pointerEvents: "none", transition: "background-color 0.6s ease",
-    }} />
+    <div
+      className={className}
+      style={{
+        position: "absolute", left: x, top: y, width: size, height: size,
+        borderRadius: "60% 40% 55% 45% / 50% 60% 40% 50%",
+        backgroundColor: color, filter: `blur(${blur})`, opacity: 0.55,
+        pointerEvents: "none", transition: "background-color 0.6s ease",
+      }}
+    />
   )
 }
 
 /* ── Hero ───────────────────────────────────────────────────── */
 
 function Hero({ dark }: { dark: boolean }) {
-  const blobs = [
-    { x: "62%", y: "8%", size: "420px", color: "var(--p-blob-1)", blur: "100px" },
-    { x: "6%", y: "58%", size: "280px", color: "var(--p-blob-3)", blur: "90px" },
-  ]
+  const blobs = dark
+    ? [
+        { x: "62%", y: "8%", size: "420px", color: "var(--p-blob-1)", blur: "100px" },
+        { x: "6%", y: "58%", size: "280px", color: "var(--p-blob-3)", blur: "90px" },
+      ]
+    : []
 
   return (
     <section id="hero" className="site-section-hero">
       {blobs.map((b, i) => <Blob key={i} {...b} />)}
 
-      <div className="site-wrap hero-in" style={{ position: "relative", zIndex: 1 }}>
-        <Label dark={dark}>Software engineer · Hong Kong</Label>
+      <div className="site-wrap hero-in">
+        <Label dark={dark} className="hero-eyebrow">Software engineer · Hong Kong</Label>
 
-        <h1 style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "clamp(3rem, 7vw, 5.5rem)",
-          lineHeight: 1.08,
-          fontWeight: 500,
-          letterSpacing: "-0.02em",
-          color: "var(--foreground)",
-          marginBottom: "1.75rem",
-        }}>
+        <h1
+          className="hero-title"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: dark ? "clamp(3rem, 7vw, 5.5rem)" : "inherit",
+            lineHeight: dark ? 1.12 : 1,
+            fontWeight: 500,
+            letterSpacing: "-0.02em",
+            color: "var(--foreground)",
+          }}
+        >
           {dark ? (
             <>
-              Good evening.<br />
-              <em style={{ fontStyle: "italic", color: "var(--primary)" }}>Alva Si.</em>
+              Salutations,<br />
+              <em className="hero-name">Alva here.</em>
             </>
           ) : (
             <>
-              Hello, I&apos;m<br />
-              <em style={{ fontStyle: "italic", color: "var(--primary)" }}>Alva Si.</em>
+              <span className="hero-kicker">Hello, I&apos;m</span>
+              <em className="hero-name">Alva.</em>
             </>
           )}
         </h1>
 
-        <p style={{
-          fontFamily: "var(--font-body)",
-          fontSize: "clamp(1rem, 2vw, 1.2rem)",
-          lineHeight: 1.8,
-          color: "var(--muted-foreground)",
-          maxWidth: "520px",
-          marginBottom: "2.5rem",
-        }}>
+        <p
+          className="hero-lede"
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "clamp(1rem, 2vw, 1rem)",
+            lineHeight: 1.85,
+            color: "var(--muted-foreground)",
+          }}
+        >
           {dark
-            ? "Software intern in Hong Kong. Same work — said more plainly."
-            : "Software intern in Hong Kong. I like work that looks considered and feels easy to use."}
-        </p>
+            ? "SWE intern in Hong Kong. Same work — said more plainly."
+            : "Currently a software engineer intern in Hong Kong. I want to build my career in a fast-paced environment where I am constantly challenged to grow. For me, work is fulfilling when I make a positive impact, and it’s fun when I get to solve difficult problems alongside a great team."}
+            </p>
 
         <a
           href="#projects"
@@ -348,12 +363,12 @@ function About({ dark }: { dark: boolean }) {
           </h2>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.85, color: "var(--muted-foreground)", marginBottom: "1rem" }}>
             {dark
-              ? "Biomedicine first, then computing. These days that’s React, C#, and production work. I like interfaces that don’t need a walkthrough, and code that’s easy to follow."
-              : "I started in biomedicine and ended up in computing. These days that’s React, C#, and a preference for interfaces that stay out of the way."}
+              ? "Biomedicine first, management next, then computing. Now working full-stack with React and C#/.NET. Vibing with LLMs to maximise productivity."
+              : "I started in medical biosciences with management and ended up in computing. Working full-stack with React and C#/.NET, I prioritise rapid translation from idea to working software. I focus on writing clear logic and orchestrating clean integrations across the backend and frontend."}
           </p>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.85, color: "var(--muted-foreground)" }}>
             {dark
-              ? "Outside work: nails, sushi, pilates, and games with a good sky."
+              ? "Outside work: nails, sushi, pilates, concerts, and games."
               : "When I’m not at a keyboard I’m usually doing my nails, getting sushi, or at pilates."}
           </p>
         </Reveal>
@@ -405,24 +420,28 @@ function ProjectCard({ project, accent, dark }: { project: typeof projects[0]; a
         borderRadius: "var(--radius)",
         border: "1px solid var(--border)",
         overflow: "hidden",
-        transition: "transform 0.2s, box-shadow 0.2s",
-        transform: hovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: hovered ? "var(--shadow-hover)" : "var(--shadow)",
+        transition: "transform 0.2s, box-shadow 0.2s, border-color 0.2s",
+        transform: dark && hovered ? "translateY(-4px)" : "translateY(0)",
+        boxShadow: dark ? (hovered ? "var(--shadow-hover)" : "var(--shadow)") : "none",
+        borderColor: !dark && hovered ? "var(--foreground)" : "var(--border)",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <div style={{ height: "6px", backgroundColor: accent }} />
+      <div style={{ height: dark ? "6px" : "1px", backgroundColor: dark ? accent : "var(--border)" }} />
       <div style={{ padding: "1.75rem", flex: 1, display: "flex", flexDirection: "column" }}>
-        <h3 style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "1.25rem",
-          fontWeight: 500,
-          color: dark ? accent : "var(--foreground)",
-          marginBottom: "0.65rem",
-        }}>
-          {project.name}
-        </h3>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "0.75rem", marginBottom: "0.65rem" }}>
+          <h3 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "1.25rem",
+            fontWeight: 500,
+            color: dark ? accent : "var(--foreground)",
+            margin: 0,
+          }}>
+            {project.name}
+          </h3>
+          <span className="project-kind">{project.kind}</span>
+        </div>
         <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", lineHeight: 1.75, color: "var(--muted-foreground)", marginBottom: "1.25rem", flex: 1 }}>
           {project.description}
         </p>
@@ -591,11 +610,11 @@ function Contact({ dark }: { dark: boolean }) {
       <div className="site-wrap">
         <Reveal>
           <h2 className="section-title" style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", fontWeight: 500, color: "var(--foreground)" }}>
-            {dark ? "Get in touch" : "Say hi"}
+            {dark ? "Get in touch" : "Contact me"}
           </h2>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--muted-foreground)", maxWidth: "420px", margin: "0 auto 2rem" }}>
             {dark
-              ? "Happy to talk about work or a project. Email is best."
+              ? "Happy to talk about work or a project."
               : "Happy to talk about work or a project."}
           </p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", flexWrap: "wrap" }}>
@@ -623,6 +642,13 @@ function Contact({ dark }: { dark: boolean }) {
 export default function App() {
   const [dark, setDark] = useState(false)
   const [cueNight, setCueNight] = useState(false)
+
+  useEffect(() => {
+    const root = document.documentElement
+    if (dark) root.setAttribute("data-dark", "true")
+    else root.removeAttribute("data-dark")
+    return () => root.removeAttribute("data-dark")
+  }, [dark])
 
   useEffect(() => {
     if (dark) {
