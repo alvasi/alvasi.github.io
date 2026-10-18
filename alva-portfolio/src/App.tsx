@@ -363,7 +363,7 @@ function About({ dark }: { dark: boolean }) {
           </h2>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.85, color: "var(--muted-foreground)", marginBottom: "1rem" }}>
             {dark
-              ? "Biomedicine first, management next, then computing. Now working full-stack with React and C#/.NET. Vibing with LLMs to maximise productivity."
+              ? "Biomedicine first, management next, then computing. Now working full-stack with React and C#/.NET. Vibing with LLMs to maximise productivity. Avid fan of pretty UI."
               : "I started in medical biosciences with management and ended up in computing. Working full-stack with React and C#/.NET, I prioritise rapid translation from idea to working software. I focus on writing clear logic and orchestrating clean integrations across the backend and frontend."}
           </p>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.85, color: "var(--muted-foreground)" }}>
@@ -533,7 +533,7 @@ function Resume({ dark }: { dark: boolean }) {
             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--primary)"; e.currentTarget.style.color = "var(--primary-foreground)" }}
             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "var(--primary)" }}
           >
-            {dark ? "Download PDF" : "Download PDF ↓"}
+            {dark ? "Download PDF ↓" : "Download PDF ↓"}
           </a>
         </Reveal>
 
@@ -614,7 +614,7 @@ function Contact({ dark }: { dark: boolean }) {
           </h2>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--muted-foreground)", maxWidth: "420px", margin: "0 auto 2rem" }}>
             {dark
-              ? "Happy to talk about work or a project."
+              ? "Work or a project - email is best."
               : "Happy to talk about work or a project."}
           </p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", flexWrap: "wrap" }}>
