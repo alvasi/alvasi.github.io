@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, type CSSProperties, type ReactNode } from "react"
+import { Aquarius } from "./Aquarius"
 import {
   copy,
   education,
@@ -130,25 +131,32 @@ function Hero({ dark }: { dark: boolean }) {
         />
       ))}
 
-      <div className="site-wrap hero-in">
-        <p className="eyebrow hero-eyebrow">{copy.eyebrow}</p>
-        <h1 className="hero-title">
-          {dark ? (
-            <>
-              {copy.heroKickerDark}<br />
-              <em className="hero-name">{copy.heroName.dark}</em>
-            </>
-          ) : (
-            <>
-              <span className="hero-kicker">{copy.heroKickerLight}</span>
-              <em className="hero-name">{copy.heroName.light}</em>
-            </>
-          )}
-        </h1>
-        <p className="hero-lede">{voice(dark, copy.heroLede.light, copy.heroLede.dark)}</p>
-        <a href="#projects" className="btn btn-fill">
-          {voice(dark, copy.heroCta.light, copy.heroCta.dark)}
-        </a>
+      <div className="site-wrap hero-stage">
+        <div className="hero-in">
+          <p className="eyebrow hero-eyebrow">{copy.eyebrow}</p>
+          <h1 className="hero-title">
+            {dark ? (
+              <>
+                {copy.heroKickerDark}<br />
+                <em className="hero-name">{copy.heroName.dark}</em>
+              </>
+            ) : (
+              <>
+                <span className="hero-kicker">{copy.heroKickerLight}</span>
+                <em className="hero-name">{copy.heroName.light}</em>
+              </>
+            )}
+          </h1>
+          <p className="hero-lede">{voice(dark, copy.heroLede.light, copy.heroLede.dark)}</p>
+          <a href="#projects" className="btn btn-fill">
+            {voice(dark, copy.heroCta.light, copy.heroCta.dark)}
+          </a>
+        </div>
+        {dark && (
+          <Reveal className="aquarius-reveal">
+            <Aquarius />
+          </Reveal>
+        )}
       </div>
     </section>
   )
@@ -317,15 +325,29 @@ function Contact({ dark }: { dark: boolean }) {
   )
 }
 
+const THEME_KEY = "alva-theme"
+
+function storedNight() {
+  try {
+    return localStorage.getItem(THEME_KEY) === "night"
+  } catch {
+    return false
+  }
+}
+
 export default function App() {
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(storedNight)
   const [cueNight, setCueNight] = useState(false)
 
   useEffect(() => {
     const root = document.documentElement
     if (dark) root.setAttribute("data-dark", "true")
     else root.removeAttribute("data-dark")
-    return () => root.removeAttribute("data-dark")
+    try {
+      localStorage.setItem(THEME_KEY, dark ? "night" : "light")
+    } catch {
+      /* private mode */
+    }
   }, [dark])
 
   useEffect(() => {

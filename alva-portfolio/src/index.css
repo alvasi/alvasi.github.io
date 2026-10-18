@@ -386,6 +386,17 @@ main {
   overflow: hidden;
 }
 
+.hero-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+}
+
+html[data-dark="true"] .hero-stage {
+  grid-template-columns: minmax(0, 1.05fr) minmax(220px, 0.9fr);
+}
+
 .hero-in {
   display: flex;
   flex-direction: column;
@@ -895,6 +906,10 @@ html:not([data-dark="true"]) .project-card:hover {
 }
 
 @media (max-width: 768px) {
+  html[data-dark="true"] .hero-stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -993,6 +1008,105 @@ html:not([data-dark="true"]) .project-card:hover {
 .reveal.is-in .skill-chip:nth-child(11) { transition-delay: 0.44s; }
 .reveal.is-in .skill-chip:nth-child(12) { transition-delay: 0.48s; }
 
+.aquarius-reveal {
+  width: 100%;
+  max-width: 420px;
+  justify-self: start;
+  margin-left: -0.5rem;
+  z-index: 2;
+}
+
+.aquarius {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.aquarius-line {
+  stroke: rgb(232 236 244 / 0.42);
+  stroke-width: 0.55;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  transition:
+    stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--aquarius-delay, 0ms),
+    opacity 0.4s ease var(--aquarius-delay, 0ms);
+}
+
+.reveal.is-in .aquarius-line {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+.aquarius-target {
+  fill: transparent;
+}
+
+.aquarius-hit {
+  cursor: pointer;
+}
+
+.aquarius-node {
+  transform-origin: 0 0;
+  fill: rgb(236 240 248 / 0.92);
+  opacity: 0;
+  transform: scale(0.25);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--aquarius-delay, 0ms),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--aquarius-delay, 0ms),
+    fill 0.18s ease,
+    filter 0.18s ease;
+}
+
+.reveal.is-in .aquarius-node {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.aquarius-shadow {
+  fill: #fff;
+  opacity: 0;
+  filter: blur(0.85px);
+  transform-origin: 0 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.reveal.is-in .aquarius-hit:hover .aquarius-node {
+  transform: scale(1.5);
+  fill: #fff;
+  filter:
+    brightness(2.2)
+    drop-shadow(0 0 0.45px #fff)
+    drop-shadow(0 0 1.1px rgb(255 255 255 / 0.9));
+  transition:
+    transform 0.18s ease,
+    fill 0.18s ease,
+    filter 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.reveal.is-in .aquarius-hit:hover .aquarius-shadow {
+  opacity: 0.55;
+  transform: scale(1.35);
+}
+
+@media (max-width: 900px) {
+  html[data-dark="true"] .hero-stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aquarius-reveal {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .aquarius-reveal {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1003,11 +1117,15 @@ html:not([data-dark="true"]) .project-card:hover {
   .skill-chip,
   .night-cue-label,
   .theme-toggle.is-cue,
-  .light-orb {
+  .light-orb,
+  .aquarius-node,
+  .aquarius-shadow,
+  .aquarius-line {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
     transition: none !important;
     filter: none !important;
+    stroke-dashoffset: 0 !important;
   }
 }
