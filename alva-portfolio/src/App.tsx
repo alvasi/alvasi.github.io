@@ -378,10 +378,15 @@ function applyChrome(dark: boolean) {
   if (dark) root.setAttribute("data-dark", "true")
   else root.removeAttribute("data-dark")
   root.style.backgroundColor = canvas
-  root.style.colorScheme = dark ? "dark" : "light"
+  root.style.colorScheme = dark ? "only dark" : "only light"
   document.body.style.backgroundColor = canvas
-  const theme = document.querySelector('meta[name="theme-color"]')
-  if (theme) theme.setAttribute("content", canvas)
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+    meta.setAttribute("content", canvas)
+  })
+  const colorScheme = document.querySelector('meta[name="color-scheme"]')
+  if (colorScheme) colorScheme.setAttribute("content", dark ? "only dark" : "only light")
+  const status = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
+  if (status) status.setAttribute("content", dark ? "black-translucent" : "default")
 }
 
 export default function App() {
@@ -413,7 +418,7 @@ export default function App() {
   }, [dark])
 
   return (
-    <div className="site-root" data-dark={dark}>
+    <div className="site-root" {...(dark ? { "data-dark": "true" } : {})}>
       <Nav dark={dark} onToggle={() => setDark((d) => !d)} cueNight={cueNight} />
       <main>
         <Hero dark={dark} />

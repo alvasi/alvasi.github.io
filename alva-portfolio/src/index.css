@@ -12,13 +12,13 @@ body,
 html {
   scroll-padding-top: calc(4.75rem + env(safe-area-inset-top, 0px));
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: only light;
   background-color: var(--p-canvas);
   transition: background-color 0.7s ease;
 }
 
 html[data-dark="true"] {
-  color-scheme: dark;
+  color-scheme: only dark;
 }
 
 :root {
@@ -136,7 +136,7 @@ body {
 }
 
 [data-dark="true"] {
-  color-scheme: dark;
+  color-scheme: only dark;
   --p-canvas: #070910;
   --p-ink: #e8ecf4;
   --p-paper: #10141c;
