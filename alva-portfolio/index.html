@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="color-scheme" content="only light" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f6f3" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#f7f6f3" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f7f6f3" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>alva-portfolio</title>
     <script>
       (() => {
@@ -19,18 +18,18 @@
         if (night) root.setAttribute("data-dark", "true")
         else root.removeAttribute("data-dark")
         root.style.backgroundColor = canvas
-        root.style.colorScheme = night ? "only dark" : "only light"
-        document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
-          meta.setAttribute("content", canvas)
-        })
+        root.style.colorScheme = night ? "dark" : "light"
+        const theme = document.querySelector('meta[name="theme-color"]')
+        if (theme) theme.setAttribute("content", canvas)
         const colorScheme = document.querySelector('meta[name="color-scheme"]')
-        if (colorScheme) colorScheme.setAttribute("content", night ? "only dark" : "only light")
-        const status = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
-        if (status) status.setAttribute("content", night ? "black-translucent" : "default")
+        if (colorScheme) colorScheme.setAttribute("content", night ? "dark" : "light")
       })()
     </script>
   </head>
   <body>
+    <script>
+      document.body.style.backgroundColor = document.documentElement.style.backgroundColor
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

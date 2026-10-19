@@ -6,19 +6,21 @@ body,
 #root {
   min-height: 100%;
   min-height: 100dvh;
-  background-color: var(--p-canvas);
+  background-color: #f7f6f3;
 }
 
 html {
   scroll-padding-top: calc(4.75rem + env(safe-area-inset-top, 0px));
   scroll-behavior: smooth;
-  color-scheme: only light;
-  background-color: var(--p-canvas);
-  transition: background-color 0.7s ease;
+  color-scheme: light;
+  background-color: #f7f6f3;
 }
 
-html[data-dark="true"] {
-  color-scheme: only dark;
+html[data-dark="true"],
+html[data-dark="true"] body,
+html[data-dark="true"] #root {
+  color-scheme: dark;
+  background-color: #070910;
 }
 
 :root {
@@ -60,10 +62,10 @@ html[data-dark="true"] {
   --p-blob-3: transparent;
   --p-blob-4: transparent;
 
-  --chip-1: var(--p-1);
-  --chip-2: var(--p-2);
-  --chip-3: var(--p-3);
-  --chip-4: var(--p-4);
+  --chip-1: color-mix(in srgb, var(--p-accent) 26%, var(--p-sunken));
+  --chip-2: color-mix(in srgb, var(--p-coral) 42%, var(--p-sunken));
+  --chip-3: color-mix(in srgb, var(--p-warm) 48%, var(--p-sunken));
+  --chip-4: color-mix(in srgb, var(--p-ink) 6%, var(--p-sunken));
   --chip-border: var(--p-line);
 
   --nav-bg: color-mix(in srgb, var(--p-canvas) 92%, transparent);
@@ -136,7 +138,7 @@ body {
 }
 
 [data-dark="true"] {
-  color-scheme: only dark;
+  color-scheme: dark;
   --p-canvas: #070910;
   --p-ink: #e8ecf4;
   --p-paper: #10141c;
@@ -240,10 +242,13 @@ body {
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
-  background-color: var(--nav-bg);
-  backdrop-filter: blur(16px);
+  background-color: #f7f6f3;
   border-bottom: 1px solid var(--border);
-  transition: background-color 0.7s ease, border-color 0.7s ease, box-shadow 0.4s ease;
+  transition: border-color 0.7s ease, box-shadow 0.4s ease;
+}
+
+html[data-dark="true"] .site-nav {
+  background-color: #070910;
 }
 
 .site-nav.is-scrolled {
@@ -1040,10 +1045,10 @@ html:not([data-dark="true"]) .project-card:hover {
     background-color 0.4s ease;
 }
 
-.skill-chip:nth-child(4n + 1) { background-color: var(--chip-1); }
-.skill-chip:nth-child(4n + 2) { background-color: var(--chip-2); }
-.skill-chip:nth-child(4n + 3) { background-color: var(--chip-3); }
-.skill-chip:nth-child(4n) { background-color: var(--chip-4); }
+.skill-chip-lang { background-color: var(--chip-1); }
+.skill-chip-app { background-color: var(--chip-2); }
+.skill-chip-plat { background-color: var(--chip-3); }
+.skill-chip-craft { background-color: var(--chip-4); }
 
 .reveal.is-in .skill-chip {
   opacity: 1;
@@ -1062,6 +1067,14 @@ html:not([data-dark="true"]) .project-card:hover {
 .reveal.is-in .skill-chip:nth-child(10) { transition-delay: 0.4s; }
 .reveal.is-in .skill-chip:nth-child(11) { transition-delay: 0.44s; }
 .reveal.is-in .skill-chip:nth-child(12) { transition-delay: 0.48s; }
+.reveal.is-in .skill-chip:nth-child(13) { transition-delay: 0.52s; }
+.reveal.is-in .skill-chip:nth-child(14) { transition-delay: 0.56s; }
+.reveal.is-in .skill-chip:nth-child(15) { transition-delay: 0.6s; }
+.reveal.is-in .skill-chip:nth-child(16) { transition-delay: 0.64s; }
+.reveal.is-in .skill-chip:nth-child(17) { transition-delay: 0.68s; }
+.reveal.is-in .skill-chip:nth-child(18) { transition-delay: 0.72s; }
+.reveal.is-in .skill-chip:nth-child(19) { transition-delay: 0.76s; }
+.reveal.is-in .skill-chip:nth-child(20) { transition-delay: 0.8s; }
 
 .aquarius-reveal {
   width: 100%;
@@ -1104,14 +1117,11 @@ html:not([data-dark="true"]) .project-card:hover {
 
 .aquarius-node {
   transform-origin: 0 0;
-  fill: rgb(236 240 248 / 0.92);
   opacity: 0;
   transform: scale(0.25);
   transition:
     opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--aquarius-delay, 0ms),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--aquarius-delay, 0ms),
-    fill 0.18s ease,
-    filter 0.18s ease;
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--aquarius-delay, 0ms);
 }
 
 .reveal.is-in .aquarius-node {
@@ -1119,15 +1129,26 @@ html:not([data-dark="true"]) .project-card:hover {
   transform: scale(1);
 }
 
+.aquarius-star {
+  transform-origin: 0 0;
+  fill: rgb(236 240 248 / 0.92);
+  transition:
+    transform 3.2s cubic-bezier(0.22, 0.45, 0.28, 1),
+    fill 2.8s ease,
+    filter 3.6s ease;
+}
+
 .aquarius-shadow {
   fill: #fff;
   opacity: 0;
   filter: blur(0.85px);
   transform-origin: 0 0;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transition:
+    opacity 3.4s cubic-bezier(0.22, 0.45, 0.28, 1),
+    transform 3.4s cubic-bezier(0.22, 0.45, 0.28, 1);
 }
 
-.reveal.is-in .aquarius-hit:hover .aquarius-node {
+.reveal.is-in .aquarius-hit:hover .aquarius-star {
   transform: scale(1.5);
   fill: #fff;
   filter:
@@ -1135,15 +1156,17 @@ html:not([data-dark="true"]) .project-card:hover {
     drop-shadow(0 0 0.45px #fff)
     drop-shadow(0 0 1.1px rgb(255 255 255 / 0.9));
   transition:
-    transform 0.18s ease,
-    fill 0.18s ease,
-    filter 0.18s ease,
-    opacity 0.18s ease;
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    fill 1.1s ease,
+    filter 1.25s ease;
 }
 
 .reveal.is-in .aquarius-hit:hover .aquarius-shadow {
   opacity: 0.55;
   transform: scale(1.35);
+  transition:
+    opacity 1.15s ease,
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (max-width: 900px) {
@@ -1212,6 +1235,7 @@ html:not([data-dark="true"]) .project-card:hover {
   .theme-toggle.is-cue,
   .light-orb,
   .aquarius-node,
+  .aquarius-star,
   .aquarius-shadow,
   .aquarius-line,
   .nav-burger span {

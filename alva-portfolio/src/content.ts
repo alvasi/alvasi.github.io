@@ -108,9 +108,27 @@ export const projects: Project[] = [
 ]
 
 export const skills = [
-  "TypeScript", "React", "C#", ".NET", "Python", "SQL",
-  "Azure", "Docker", "PostgreSQL", "PyTorch", "Figma", "Git",
-]
+  { name: "TypeScript", cat: "lang" },
+  { name: "C#", cat: "lang" },
+  { name: "C++", cat: "lang" },
+  { name: "Python", cat: "lang" },
+  { name: "HTML", cat: "lang" },
+  { name: "SQL", cat: "lang" },
+  { name: "Java", cat: "lang" },
+  { name: "React", cat: "app" },
+  { name: ".NET", cat: "app" },
+  { name: "REST APIs", cat: "app" },
+  { name: "Microservices", cat: "app" },
+  { name: "PyTorch", cat: "app" },
+  { name: "Figma", cat: "app" },
+  { name: "Azure", cat: "plat" },
+  { name: "Docker", cat: "plat" },
+  { name: "PostgreSQL", cat: "plat" },
+  { name: "Git", cat: "craft" },
+  { name: "CI/CD", cat: "craft" },
+  { name: "TDD", cat: "craft" },
+  { name: "Scrum", cat: "craft" },
+] as const
 
 export const experience = [
   {

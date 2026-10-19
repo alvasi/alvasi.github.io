@@ -73,8 +73,10 @@ export function Aquarius() {
         >
           <circle r="5" className="aquarius-target" />
           <g className="aquarius-node">
-            <path className="aquarius-shadow" d={STAR} />
-            <path d={STAR} />
+            <g className="aquarius-star">
+              <path className="aquarius-shadow" d={STAR} />
+              <path d={STAR} />
+            </g>
           </g>
         </g>
       ))}

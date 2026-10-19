@@ -14,6 +14,9 @@ import {
   type Project,
 } from "./content"
 
+const THEME_KEY = "alva-theme"
+const CANVAS = { light: "#f7f6f3", night: "#070910" }
+
 function Reveal({
   children,
   className = "",
@@ -105,7 +108,10 @@ function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void
   }, [menuOpen])
 
   return (
-    <nav className={`site-nav${scrolled ? " is-scrolled" : ""}${menuOpen ? " is-open" : ""}`}>
+    <nav
+      className={`site-nav${scrolled ? " is-scrolled" : ""}${menuOpen ? " is-open" : ""}`}
+      style={{ backgroundColor: dark ? CANVAS.night : CANVAS.light }}
+    >
       <div className="site-nav-inner">
         <span className="nav-brand">{voice(dark, copy.brand.light, copy.brand.dark)}</span>
         <div id="site-nav-menu" className={`site-nav-links${menuOpen ? " is-open" : ""}`}>
@@ -213,7 +219,7 @@ function About({ dark }: { dark: boolean }) {
           <h3 className="kicker kicker-skills">{voice(dark, copy.skillsTitle.light, copy.skillsTitle.dark)}</h3>
           <div className="chip-row">
             {skills.map((skill) => (
-              <span key={skill} className="skill-chip">{skill}</span>
+              <span key={skill.name} className={`skill-chip skill-chip-${skill.cat}`}>{skill.name}</span>
             ))}
           </div>
         </Reveal>
@@ -361,9 +367,6 @@ function Contact({ dark }: { dark: boolean }) {
   )
 }
 
-const THEME_KEY = "alva-theme"
-const CANVAS = { light: "#f7f6f3", night: "#070910" }
-
 function storedNight() {
   try {
     return localStorage.getItem(THEME_KEY) === "night"
@@ -378,15 +381,17 @@ function applyChrome(dark: boolean) {
   if (dark) root.setAttribute("data-dark", "true")
   else root.removeAttribute("data-dark")
   root.style.backgroundColor = canvas
-  root.style.colorScheme = dark ? "only dark" : "only light"
+  root.style.colorScheme = dark ? "dark" : "light"
   document.body.style.backgroundColor = canvas
-  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
-    meta.setAttribute("content", canvas)
-  })
+  const mount = document.getElementById("root")
+  if (mount) mount.style.backgroundColor = canvas
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.remove())
+  const theme = document.createElement("meta")
+  theme.name = "theme-color"
+  theme.content = canvas
+  document.head.appendChild(theme)
   const colorScheme = document.querySelector('meta[name="color-scheme"]')
-  if (colorScheme) colorScheme.setAttribute("content", dark ? "only dark" : "only light")
-  const status = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
-  if (status) status.setAttribute("content", dark ? "black-translucent" : "default")
+  if (colorScheme) colorScheme.setAttribute("content", dark ? "dark" : "light")
 }
 
 export default function App() {
