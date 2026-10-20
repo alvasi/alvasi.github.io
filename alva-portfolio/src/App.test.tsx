@@ -1,11 +1,14 @@
-import { cleanup, render, screen } from "@testing-library/react"
+import { cleanup, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { afterEach, describe, expect, it } from "vitest"
-import App from "./App"
+import App, { THEME_KEY, storedNight } from "./App"
 
 afterEach(() => {
   cleanup()
   document.body.style.overflow = ""
+  document.documentElement.removeAttribute("data-dark")
+  document.documentElement.style.backgroundColor = ""
+  document.documentElement.style.colorScheme = ""
   localStorage.clear()
 })
 
@@ -43,5 +46,37 @@ describe("App", () => {
     await user.keyboard("{Escape}")
     expect(screen.getByRole("button", { name: "Open menu" })).toBeInTheDocument()
     expect(document.body.style.overflow).toBe("")
+  })
+
+  it("treats missing storage as light, not night", () => {
+    localStorage.removeItem(THEME_KEY)
+    expect(storedNight()).toBe(false)
+    localStorage.setItem(THEME_KEY, "light")
+    expect(storedNight()).toBe(false)
+    localStorage.setItem(THEME_KEY, "night")
+    expect(storedNight()).toBe(true)
+  })
+
+  it("defaults to light when no theme is stored", async () => {
+    localStorage.removeItem(THEME_KEY)
+    render(<App />)
+
+    expect(screen.getByRole("button", { name: "Switch to dark mode" })).toBeInTheDocument()
+    expect(document.querySelector(".site-root")).not.toHaveAttribute("data-dark")
+    await waitFor(() => {
+      expect(document.documentElement).not.toHaveAttribute("data-dark")
+      expect(localStorage.getItem(THEME_KEY)).toBe("light")
+    })
+  })
+
+  it("restores night only when that choice is stored", async () => {
+    localStorage.setItem(THEME_KEY, "night")
+    render(<App />)
+
+    expect(screen.getByRole("button", { name: "Switch to light mode" })).toBeInTheDocument()
+    expect(document.querySelector(".site-root")).toHaveAttribute("data-dark", "true")
+    await waitFor(() => {
+      expect(document.documentElement).toHaveAttribute("data-dark", "true")
+    })
   })
 })

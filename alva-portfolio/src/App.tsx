@@ -14,7 +14,7 @@ import {
   type Project,
 } from "./content"
 
-const THEME_KEY = "alva-theme"
+export const THEME_KEY = "alva-theme"
 const CANVAS = { light: "#f7f6f3", night: "#070910" }
 
 function Reveal({
@@ -428,7 +428,14 @@ function Resume({ dark }: { dark: boolean }) {
                 </div>
                 <span className="entry-period">{ed.period}</span>
               </div>
-              <p className="entry-note">{ed.note}</p>
+              {ed.note && <p className="entry-note">{ed.note}</p>}
+              {ed.bullets && (
+                <ul className="entry-list">
+                  {ed.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              )}
             </Reveal>
           ))}
         </div>
@@ -456,7 +463,7 @@ function Contact({ dark }: { dark: boolean }) {
   )
 }
 
-function storedNight() {
+export function storedNight() {
   try {
     return localStorage.getItem(THEME_KEY) === "night"
   } catch {

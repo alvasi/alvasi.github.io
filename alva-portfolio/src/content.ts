@@ -16,21 +16,22 @@ export const copy = {
   brand: { light: "Alva Si", dark: "Alva, after hours" },
   themeAria: { light: "Switch to dark mode", dark: "Switch to light mode" },
   nightCue: "Night →",
-  eyebrow: "Software engineer · Hong Kong",
+  aquariusFact: "Fun fact: I'm scared of heights - but wanted a skydiving license.",
+  eyebrow: "Software engineer intern · Hong Kong",
   heroName: { light: "Alva.", dark: "Alva here." },
   heroKickerLight: "Hello, I’m",
   heroKickerDark: "Salutations,",
   heroLede: {
     light:
-      "Currently a software engineer intern in Hong Kong. I want to build my career in a fast-paced environment where I am constantly challenged to grow. For me, work is fulfilling when I make a positive impact, and it’s fun when I get to solve difficult problems alongside a great team.",
-    dark: "SWE intern in Hong Kong. Looking for a fun, rewarding job where curiosity and continuous learning are encouraged.",
+      "I like work that has been thought through, then finished to a high standard. Finding meaning in what I do is incredibly rewarding.",
+    dark: "Happiest when the brief is thoroughly discussed and what we ship makes a positive impact.",
   },
   heroCta: { light: "See My Work", dark: "View the Work" },
   aboutTitle: { light: "A Bit About Me", dark: "About" },
   aboutP1: {
     light:
-      "I started in medical biosciences with management and ended up in computing. Working full-stack with React and C#/.NET, I prioritise rapid translation from idea to working software. I focus on writing clear logic and orchestrating clean integrations across the backend and frontend.",
-    dark: "Biomedicine first, management next, then computing. Now working full-stack with React and C#/.NET. Vibing with LLMs to maximise productivity. Admirer of clean code and avid fan of pretty UI.",
+      "Arrived at computing after a BSc in medical biosciences with management. In science I got used to testing a hypothesis and reading until I could see the gaps. Management taught me to understand the audience, and tailor adoption strategies accordingly. That’s why I like to know more about the problem, so I can develop and ship something that feels considered.",
+    dark: "Biomedicine, then management, then computing. Got used to looking for the gap, then figuring out who it’s for and how it catches on. Admirer of clean code and fan of pretty UIs.",
   },
   aboutP2: {
     light: "When I’m not at a keyboard I’m usually doing my nails, getting sushi, or at pilates.",
@@ -39,8 +40,8 @@ export const copy = {
   skillsTitle: { light: "Skills & Tools", dark: "What I Use" },
   projectsTitle: { light: "Selected Projects", dark: "What I’ve Been Building" },
   projectsIntro: {
-    light: "A few things I’ve made — including one still in progress.",
-    dark: "A few things I’ve shipped — one is still in progress.",
+    light: "A few things I’ve made — including ones that are still in progress.",
+    dark: "A few things I’ve shipped — some are still iterating.",
   },
   resumeTitle: { light: "Resume", dark: "Experience" },
   resumeIntro: {
@@ -53,7 +54,7 @@ export const copy = {
   contactTitle: { light: "Contact Me", dark: "Get in Touch" },
   contactLede: {
     light: "Happy to talk about work or a project.",
-    dark: "Work or a project — email is best.",
+    dark: "Work or a project — email is best. Sushi recommendations are welcome too :D",
   },
   copyright: "© 2026 Alva Si",
 } as const
@@ -174,12 +175,21 @@ export const education = [
     school: "Imperial College London",
     period: "Oct 2023 — Sep 2024",
     note: "Distinction · Individual project 79% — security-focused smart-contract analysis plugin",
+    bullets: [
+      "Delivered a note-taking platform in a team of five — microservices, REST APIs, Docker, Azure, and GitHub Actions CI/CD.",
+      "Wrote a neural-network library from scratch and a PyTorch regression model (97%).",
+      "Implemented a rule-based chess engine in C++ using OOP, with UML for the system design.",
+      "Modules: Principles and Practice of Programming, Algorithms, Introduction to Machine Learning, Software Systems Engineering, Software Engineering Design, Databases, Computer Systems, Logic and Mathematics.",
+    ],
   },
   {
     degree: "BSc Medical Biosciences with Management",
     school: "Imperial College London",
     period: "Oct 2019 — Jun 2023",
     note: "First Class Honours · Dean's List (Management Year) · ICBS Best Group Project",
+    bullets: [
+      "Modules: Biomedicine Data Science, Statistics, Research Methods and Practice, Laboratory Based Research Project, Finance and Financial Management, Accounting, Business Economics, Marketing, Science Communication and Public Engagement.",
+    ],
   },
 ]
 

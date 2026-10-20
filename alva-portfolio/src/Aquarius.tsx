@@ -1,4 +1,7 @@
-const VIEW = { w: 100, h: 108 }
+import { useState, type KeyboardEvent } from "react"
+import { copy } from "./content"
+
+const VIEW = { x: 8, y: 0, w: 86, h: 108 }
 
 const nodes = [
   { id: "a", x: 86, y: 8 },
@@ -46,40 +49,78 @@ const STAR = (() => {
 })()
 
 export function Aquarius() {
+  const [lit, setLit] = useState(() => new Set<string>())
+  const complete = lit.size === nodes.length
+
+  function light(id: string) {
+    setLit((prev) => {
+      if (prev.has(id)) return prev
+      const next = new Set(prev)
+      next.add(id)
+      return next
+    })
+  }
+
+  function onStarKey(event: KeyboardEvent<SVGGElement>, id: string) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault()
+      light(id)
+    }
+  }
+
   return (
-    <svg
-      className="aquarius"
-      viewBox={`0 0 ${VIEW.w} ${VIEW.h}`}
-      aria-hidden="true"
-    >
-      {edges.map(([a, b], i) => (
-        <line
-          key={`${a}-${b}`}
-          x1={at[a].x}
-          y1={at[a].y}
-          x2={at[b].x}
-          y2={at[b].y}
-          className="aquarius-line"
-          pathLength={1}
-          style={{ ["--aquarius-delay" as string]: `${80 + i * 55}ms` }}
-        />
-      ))}
-      {nodes.map((node, i) => (
-        <g
-          key={node.id}
-          className="aquarius-hit"
-          transform={`translate(${node.x} ${node.y})`}
-          style={{ ["--aquarius-delay" as string]: `${i * 55}ms` }}
-        >
-          <circle r="5" className="aquarius-target" />
-          <g className="aquarius-node">
-            <g className="aquarius-star">
-              <path className="aquarius-shadow" d={STAR} />
-              <path d={STAR} />
+    <div className="aquarius-egg">
+      <svg
+        className="aquarius"
+        viewBox={`${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`}
+        role="group"
+        aria-label={complete ? copy.aquariusFact : "Aquarius. Light each star."}
+      >
+        {edges.map(([a, b], i) => (
+          <line
+            key={`${a}-${b}`}
+            x1={at[a].x}
+            y1={at[a].y}
+            x2={at[b].x}
+            y2={at[b].y}
+            className={`aquarius-line${lit.has(a) && lit.has(b) ? " is-on" : ""}`}
+            pathLength={1}
+            style={{ ["--aquarius-delay" as string]: `${80 + i * 55}ms` }}
+          />
+        ))}
+        {nodes.map((node, i) => {
+          const on = lit.has(node.id)
+          return (
+            <g
+              key={node.id}
+              className={`aquarius-hit${on ? " is-lit" : ""}`}
+              transform={`translate(${node.x} ${node.y})`}
+              style={{
+                ["--aquarius-delay" as string]: `${i * 55}ms`,
+                ["--shine-duration" as string]: `${2.6 + (i % 5) * 0.4}s`,
+                ["--shine-delay" as string]: `${(i % 7) * -0.35}s`,
+              }}
+              role="button"
+              tabIndex={0}
+              aria-pressed={on}
+              aria-label={`Star ${i + 1} of ${nodes.length}`}
+              onClick={() => light(node.id)}
+              onKeyDown={(event) => onStarKey(event, node.id)}
+            >
+              <circle r="5" className="aquarius-target" />
+              <g className="aquarius-node">
+                <g className="aquarius-star">
+                  <path className="aquarius-shadow" d={STAR} />
+                  <path d={STAR} />
+                </g>
+              </g>
             </g>
-          </g>
-        </g>
-      ))}
-    </svg>
+          )
+        })}
+      </svg>
+      <p className={`aquarius-sign${complete ? " is-on" : ""}`} aria-live="polite">
+        {complete ? copy.aquariusFact : "\u00a0"}
+      </p>
+    </div>
   )
 }

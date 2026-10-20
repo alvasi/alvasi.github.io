@@ -1155,6 +1155,11 @@ html:not([data-dark="true"]) .project-card:hover {
   z-index: 2;
 }
 
+.aquarius-egg {
+  position: relative;
+  width: 100%;
+}
+
 .aquarius {
   width: 100%;
   height: auto;
@@ -1178,12 +1183,27 @@ html:not([data-dark="true"]) .project-card:hover {
   opacity: 1;
 }
 
+.reveal.is-in .aquarius-line.is-on {
+  stroke: rgb(236 240 248 / 0.82);
+}
+
 .aquarius-target {
   fill: transparent;
 }
 
 .aquarius-hit {
-  cursor: default;
+  cursor: pointer;
+}
+
+.aquarius-hit:focus {
+  outline: none;
+}
+
+.aquarius-hit:focus-visible .aquarius-star {
+  fill: #fff;
+  filter:
+    brightness(1.8)
+    drop-shadow(0 0 0.45px #fff);
 }
 
 .aquarius-node {
@@ -1240,6 +1260,73 @@ html:not([data-dark="true"]) .project-card:hover {
   transition:
     opacity 1.15s ease,
     transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-in .aquarius-hit.is-lit .aquarius-star {
+  fill: #fff;
+  animation: aquarius-shine var(--shine-duration, 2.8s) ease-in-out infinite;
+  animation-delay: var(--shine-delay, 0s);
+}
+
+.reveal.is-in .aquarius-hit.is-lit .aquarius-shadow {
+  animation: aquarius-halo var(--shine-duration, 2.8s) ease-in-out infinite;
+  animation-delay: var(--shine-delay, 0s);
+}
+
+.reveal.is-in .aquarius-hit.is-lit:hover .aquarius-star,
+.reveal.is-in .aquarius-hit.is-lit:hover .aquarius-shadow {
+  transition: none;
+}
+
+@keyframes aquarius-shine {
+  0%,
+  100% {
+    transform: scale(1.08);
+    filter:
+      brightness(1.35)
+      drop-shadow(0 0 0.25px #fff)
+      drop-shadow(0 0 0.45px rgb(255 255 255 / 0.45));
+  }
+  50% {
+    transform: scale(1.22);
+    filter:
+      brightness(1.7)
+      drop-shadow(0 0 0.35px #fff)
+      drop-shadow(0 0 0.7px rgb(255 255 255 / 0.7));
+  }
+}
+
+@keyframes aquarius-halo {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(1.06);
+  }
+  50% {
+    opacity: 0.38;
+    transform: scale(1.18);
+  }
+}
+
+.aquarius-sign {
+  box-sizing: border-box;
+  margin: 0.2rem 0 0;
+  padding: 0 9%;
+  min-height: 1.3em;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: rgb(232 236 244 / 0.62);
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.aquarius-sign.is-on {
+  opacity: 1;
 }
 
 @media (max-width: 900px) {
@@ -1314,6 +1401,7 @@ html:not([data-dark="true"]) .project-card:hover {
   .aquarius-star,
   .aquarius-shadow,
   .aquarius-line,
+  .aquarius-sign,
   .nav-burger span {
     opacity: 1 !important;
     transform: none !important;
