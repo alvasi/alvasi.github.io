@@ -80,9 +80,51 @@ function ThemeIcon({ dark }: { dark: boolean }) {
   )
 }
 
-function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void; cueNight: boolean }) {
+function ExtLink({
+  href,
+  children,
+  className,
+  label,
+  kind,
+}: {
+  href: string
+  children: ReactNode
+  className?: string
+  label: string
+  kind?: string
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+      aria-label={`${label} (opens in a new tab)`}
+      {...(kind ? { "data-kind": kind } : {})}
+    >
+      {children}
+    </a>
+  )
+}
+
+const MOBILE_NAV = "(max-width: 900px)"
+
+function Nav({
+  dark,
+  onToggle,
+  cueNight,
+  menuOpen,
+  onMenuOpenChange,
+}: {
+  dark: boolean
+  onToggle: () => void
+  cueNight: boolean
+  menuOpen: boolean
+  onMenuOpenChange: (open: boolean) => void
+}) {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const navRef = useRef<HTMLElement>(null)
+  const burgerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -93,65 +135,111 @@ function Nav({ dark, onToggle, cueNight }: { dark: boolean; onToggle: () => void
 
   useEffect(() => {
     if (!menuOpen) return
+    const nav = navRef.current
+    const isMobile = () => window.matchMedia(MOBILE_NAV).matches
+    if (!isMobile()) return
+
+    const focusables = () => {
+      if (!nav) return []
+      return [...nav.querySelectorAll<HTMLElement>("a.nav-link, .theme-toggle, .nav-burger")]
+        .filter((el) => getComputedStyle(el).display !== "none")
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false)
+      if (e.key === "Escape") {
+        onMenuOpenChange(false)
+        burgerRef.current?.focus()
+        return
+      }
+      if (e.key !== "Tab") return
+      const items = focusables()
+      if (items.length === 0) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
     }
+
+    const onFocusIn = (e: FocusEvent) => {
+      const target = e.target
+      if (!(target instanceof Node) || nav?.contains(target)) return
+      if (target instanceof Element && target.closest(".nav-backdrop")) return
+      burgerRef.current?.focus()
+    }
+
     const onResize = () => {
-      if (window.matchMedia("(min-width: 901px)").matches) setMenuOpen(false)
+      if (window.matchMedia("(min-width: 901px)").matches) onMenuOpenChange(false)
     }
+
     window.addEventListener("keydown", onKey)
+    document.addEventListener("focusin", onFocusIn)
     window.addEventListener("resize", onResize)
     return () => {
+      document.body.style.overflow = previousOverflow
       window.removeEventListener("keydown", onKey)
+      document.removeEventListener("focusin", onFocusIn)
       window.removeEventListener("resize", onResize)
     }
-  }, [menuOpen])
+  }, [menuOpen, onMenuOpenChange])
 
   return (
-    <nav
-      className={`site-nav${scrolled ? " is-scrolled" : ""}${menuOpen ? " is-open" : ""}`}
-      style={{ backgroundColor: dark ? CANVAS.night : CANVAS.light }}
-    >
-      <div className="site-nav-inner">
-        <span className="nav-brand">{voice(dark, copy.brand.light, copy.brand.dark)}</span>
-        <div id="site-nav-menu" className={`site-nav-links${menuOpen ? " is-open" : ""}`}>
-          {navItems.map((label) => (
-            <a
-              key={label}
-              href={`#${label.toLowerCase()}`}
-              className="nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
-        <div className="site-nav-actions">
-          <span className="theme-toggle-wrap">
-            {cueNight && !dark && <span className="night-cue-label">{copy.nightCue}</span>}
+    <header>
+      <nav
+        ref={navRef}
+        className={`site-nav${scrolled ? " is-scrolled" : ""}${menuOpen ? " is-open" : ""}`}
+        style={{ backgroundColor: dark ? CANVAS.night : CANVAS.light }}
+      >
+        <div className="site-nav-inner">
+          <span className="nav-brand">{voice(dark, copy.brand.light, copy.brand.dark)}</span>
+          <div id="site-nav-menu" className={`site-nav-links${menuOpen ? " is-open" : ""}`}>
+            {navItems.map((label) => (
+              <a
+                key={label}
+                href={`#${label.toLowerCase()}`}
+                className="nav-link"
+                onClick={() => onMenuOpenChange(false)}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+          <div className="site-nav-actions">
+            <span className="theme-toggle-wrap">
+              {cueNight && !dark && <span className="night-cue-label">{copy.nightCue}</span>}
+              <button
+                type="button"
+                className={`theme-toggle${cueNight && !dark ? " is-cue" : ""}`}
+                onClick={onToggle}
+                aria-label={voice(dark, copy.themeAria.light, copy.themeAria.dark)}
+              >
+                <ThemeIcon dark={dark} />
+              </button>
+            </span>
             <button
-              className={`theme-toggle${cueNight && !dark ? " is-cue" : ""}`}
-              onClick={onToggle}
-              aria-label={voice(dark, copy.themeAria.light, copy.themeAria.dark)}
+              ref={burgerRef}
+              type="button"
+              className="nav-burger"
+              aria-expanded={menuOpen}
+              aria-controls="site-nav-menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              onClick={() => onMenuOpenChange(!menuOpen)}
             >
-              <ThemeIcon dark={dark} />
+              <span />
+              <span />
+              <span />
             </button>
-          </span>
-          <button
-            type="button"
-            className="nav-burger"
-            aria-expanded={menuOpen}
-            aria-controls="site-nav-menu"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }
 
@@ -162,6 +250,7 @@ function Hero({ dark }: { dark: boolean }) {
         <div
           key={`${blob.x}-${blob.y}`}
           className="blob"
+          aria-hidden="true"
           style={{
             left: blob.x,
             top: blob.y,
@@ -245,14 +334,14 @@ function ProjectCard({ project, accent }: { project: Project; accent: string }) 
         </div>
         <div className="project-links">
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" data-kind="github">
+            <ExtLink href={project.github} className="project-link" label="GitHub" kind="github">
               GitHub ↗
-            </a>
+            </ExtLink>
           )}
           {project.live && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" data-kind="live">
+            <ExtLink href={project.live} className="project-link" label="Live site" kind="live">
               Live ↗
-            </a>
+            </ExtLink>
           )}
         </div>
       </div>
@@ -289,9 +378,9 @@ function Resume({ dark }: { dark: boolean }) {
             <h2 className="section-title">{voice(dark, copy.resumeTitle.light, copy.resumeTitle.dark)}</h2>
             <p className="copy">{voice(dark, copy.resumeIntro.light, copy.resumeIntro.dark)}</p>
           </div>
-          <a href={links.cv} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+          <ExtLink href={links.cv} className="btn btn-outline" label="Download PDF">
             {copy.resumePdf}
-          </a>
+          </ExtLink>
         </Reveal>
 
         <Reveal>
@@ -357,8 +446,8 @@ function Contact({ dark }: { dark: boolean }) {
           <p className="copy contact-lede">{voice(dark, copy.contactLede.light, copy.contactLede.dark)}</p>
           <div className="contact-links">
             <a href={links.email} className="contact-email">{links.emailLabel}</a>
-            <a href={links.github} target="_blank" rel="noopener noreferrer" className="contact-social">GitHub</a>
-            <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="contact-social">LinkedIn</a>
+            <ExtLink href={links.github} className="contact-social" label="GitHub">GitHub</ExtLink>
+            <ExtLink href={links.linkedin} className="contact-social" label="LinkedIn">LinkedIn</ExtLink>
           </div>
           <p className="copyright">{copy.copyright}</p>
         </Reveal>
@@ -397,6 +486,7 @@ function applyChrome(dark: boolean) {
 export default function App() {
   const [dark, setDark] = useState(storedNight)
   const [cueNight, setCueNight] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     applyChrome(dark)
@@ -424,8 +514,25 @@ export default function App() {
 
   return (
     <div className="site-root" {...(dark ? { "data-dark": "true" } : {})}>
-      <Nav dark={dark} onToggle={() => setDark((d) => !d)} cueNight={cueNight} />
-      <main>
+      <a className="skip-link" href="#main" {...(menuOpen ? { inert: true } : {})}>
+        Skip to content
+      </a>
+      <Nav
+        dark={dark}
+        onToggle={() => setDark((d) => !d)}
+        cueNight={cueNight}
+        menuOpen={menuOpen}
+        onMenuOpenChange={setMenuOpen}
+      />
+      {menuOpen && (
+        <button
+          type="button"
+          className="nav-backdrop"
+          aria-label="Dismiss menu"
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+      <main id="main" {...(menuOpen ? { inert: true } : {})}>
         <Hero dark={dark} />
         <About dark={dark} />
         <Projects dark={dark} />

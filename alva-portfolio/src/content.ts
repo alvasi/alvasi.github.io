@@ -18,15 +18,15 @@ export const copy = {
   nightCue: "Night →",
   eyebrow: "Software engineer · Hong Kong",
   heroName: { light: "Alva.", dark: "Alva here." },
-  heroKickerLight: "Hello, I'm",
+  heroKickerLight: "Hello, I’m",
   heroKickerDark: "Salutations,",
   heroLede: {
     light:
       "Currently a software engineer intern in Hong Kong. I want to build my career in a fast-paced environment where I am constantly challenged to grow. For me, work is fulfilling when I make a positive impact, and it’s fun when I get to solve difficult problems alongside a great team.",
     dark: "SWE intern in Hong Kong. Looking for a fun, rewarding job where curiosity and continuous learning are encouraged.",
   },
-  heroCta: { light: "See my work", dark: "View the work" },
-  aboutTitle: { light: "A bit about me", dark: "About" },
+  heroCta: { light: "See My Work", dark: "View the Work" },
+  aboutTitle: { light: "A Bit About Me", dark: "About" },
   aboutP1: {
     light:
       "I started in medical biosciences with management and ended up in computing. Working full-stack with React and C#/.NET, I prioritise rapid translation from idea to working software. I focus on writing clear logic and orchestrating clean integrations across the backend and frontend.",
@@ -36,8 +36,8 @@ export const copy = {
     light: "When I’m not at a keyboard I’m usually doing my nails, getting sushi, or at pilates.",
     dark: "Outside work: nails, sushi, pilates, concerts, and games.",
   },
-  skillsTitle: { light: "Skills & tools", dark: "What I use" },
-  projectsTitle: { light: "Selected projects", dark: "What I've been building" },
+  skillsTitle: { light: "Skills & Tools", dark: "What I Use" },
+  projectsTitle: { light: "Selected Projects", dark: "What I’ve Been Building" },
   projectsIntro: {
     light: "A few things I’ve made — including one still in progress.",
     dark: "A few things I’ve shipped — one is still in progress.",
@@ -47,13 +47,13 @@ export const copy = {
     light: "Messaging SaaS, computer vision, and a bioinformatics lab.",
     dark: "Messaging SaaS, computer vision, bioinformatics.",
   },
-  resumePdf: "Download PDF ↓",
+  resumePdf: "Download PDF",
   experienceHeading: "Experience",
   educationHeading: "Education",
-  contactTitle: { light: "Contact me", dark: "Get in touch" },
+  contactTitle: { light: "Contact Me", dark: "Get in Touch" },
   contactLede: {
     light: "Happy to talk about work or a project.",
-    dark: "Work or a project - email is best.",
+    dark: "Work or a project — email is best.",
   },
   copyright: "© 2026 Alva Si",
 } as const
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     name: "A Smarter Smart Contract IDE",
     kind: "Solo",
     description:
-      "MSc individual project (79%): a security-focused Remix plugin that improved AI-generated smart-contract security by 67% versus the baseline co-pilot, at under USD 0.003 per run.",
+      "MSc individual project (79%): a security-focused Remix plugin that improved AI-generated smart-contract security by 67% versus the baseline co-pilot, at under USD\u00a00.003 per run.",
     stack: ["TypeScript", "React", "Smart Contracts"],
     github: "https://github.com/alvasi/remix-contract-generator",
     live: null,
@@ -136,7 +136,7 @@ export const experience = [
     company: "SleekFlow",
     period: "Apr 2026 — Present",
     location: "Hong Kong",
-    about: "B2B SaaS for messaging and CRM, serving 7000+ customers.",
+    about: "B2B SaaS for messaging and CRM, serving 7,000+ customers.",
     bullets: [
       "Delivered 85 tickets across 12 two-week Scrum sprints on a React/TypeScript and C#/.NET stack.",
       "Shipped 45+ tickets on team inbox, including in-chat search, saved replies v1 to v2 migration, and message list filters.",
