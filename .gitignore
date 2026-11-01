@@ -1,2 +1,11 @@
 .DS_Store
 node_modules/
+
+# Job-application drafts. The public CV is alva-portfolio/public/Alva_Si_CV.pdf.
+applications/
+
+# LaTeX build junk next to the portfolio CV source (keep *.tex).
+alva-portfolio/cv/*.pdf
+alva-portfolio/cv/*.aux
+alva-portfolio/cv/*.log
+alva-portfolio/cv/*.synctex.gz

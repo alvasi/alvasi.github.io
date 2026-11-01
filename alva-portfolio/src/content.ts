@@ -23,8 +23,8 @@ export const copy = {
   heroKickerDark: "Salutations,",
   heroLede: {
     light:
-      "I like work that has been thought through, then finished to a high standard. Finding meaning in what I do is incredibly rewarding.",
-    dark: "Happiest when the brief is thoroughly discussed and what we ship makes a positive impact.",
+      "I like work that is finished to a high standard. Finding meaning in what I do is incredibly rewarding.",
+    dark: "Happiest when what I ship makes a positive impact.",
   },
   heroCta: { light: "See My Work", dark: "View the Work" },
   aboutTitle: { light: "A Bit About Me", dark: "About" },
@@ -139,11 +139,11 @@ export const experience = [
     location: "Hong Kong",
     about: "B2B SaaS for messaging and CRM, serving 7,000+ customers.",
     bullets: [
-      "Delivered 85 tickets across 12 two-week Scrum sprints on a React/TypeScript and C#/.NET stack.",
-      "Shipped 45+ tickets on team inbox, including in-chat search, saved replies v1 to v2 migration, and message list filters.",
-      "Liaised with customer support and senior engineers on 35+ production defects, shipping 5 as mid-sprint hot-fixes after tracing root causes in GCP/Azure logs, webhooks, and DevTools.",
-      "Served as sprint master and on-call technical support for two sprints, leading stand-ups, team meetings, and retrospectives.",
-      "Built a silent webhook-replay backfill that recovered inbound WhatsApp messages lost to an identity-index failure, preserving timestamps without firing automations.",
+      "Delivered 95+ tickets across 13 two-week Scrum sprints on a React/TypeScript and C#/.NET stack, working with product managers and QA engineers from requirements through production release.",
+      "Shipped 50+ tickets on team inbox, including in-chat search, saved replies v1 to v2 migration, message list filters, and per-channel file-size limits.",
+      "Liaised with customer support and senior engineers on 40+ production defects, shipping 5 as mid-sprint hotfixes after tracing root causes in GCP/Azure logs, webhooks, database queries, and DevTools.",
+      "Served as sprint master and on-call technical support for two sprints, leading daily stand-ups, team meetings, and retrospectives.",
+      "Built a backfill tool that replays inbound webhook events with original timestamps, without re-triggering automations or notifications, backed by a dry-run mode and mutation-tested safeguards.",
     ],
   },
   {
@@ -153,8 +153,8 @@ export const experience = [
     location: "Hong Kong",
     about: "Edge AIoT computer-vision platform for real-time video analytics.",
     bullets: [
-      "Raised computer-vision dataset quality by redesigning annotation protocols and curating training subsets, helping the model meet the client’s 90%+ accuracy requirement.",
-      "Automated data-ingestion pipelines in Python and wrote test suites for previously untested internal tools, reaching 100% coverage and resolving long-standing defects.",
+      "Raised computer-vision dataset quality by redesigning annotation protocols and curating training subsets; the model then met the client’s accuracy requirement of over 90%.",
+      "Automated data-ingestion pipelines in Python, cutting raw-media processing time, and wrote test suites for previously untested internal tools, reaching 100% coverage and resolving long-standing defects.",
     ],
   },
   {
@@ -164,7 +164,7 @@ export const experience = [
     location: "Hong Kong",
     about: "Academic research in computational biology and genomics.",
     bullets: [
-      "Engineered a convolutional neural network in PyTorch to model RNA transcription efficiency from genomic sequences, covering preprocessing, architecture design, and evaluation.",
+      "Engineered a convolutional neural network in PyTorch to model RNA transcription efficiency from genomic sequences, covering data preprocessing, architecture design, and performance evaluation.",
     ],
   },
 ]

@@ -1,0 +1,102 @@
+% Alva Si — portfolio / general engineering CV (one page).
+% Source of truth for alva-portfolio/public/Alva_Si_CV.pdf.
+% Do not use for role-tailored applications (those live under applications/).
+% Design rules: A4, single column, 10pt, no tables, dates right-aligned with \hfill,
+% real bullets, PDF text order matches reading order (ATS-safe).
+\documentclass[10pt,a4paper]{article}
+
+% ---------- packages ----------
+\usepackage[a4paper,margin=0.5in,top=0.45in,bottom=0.45in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage[none]{hyphenat}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks,pdfauthor={Alva Si},pdftitle={Alva Si CV}]{hyperref}
+\usepackage{microtype}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\raggedright
+\definecolor{link}{RGB}{31,78,121}
+
+\titleformat{\section}{\bfseries\large}{}{0pt}{\MakeUppercase}[\vspace{8pt}\titlerule]
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+\newcommand{\entry}[3]{\vspace{4pt}\textbf{#1}\ #2\hfill\mbox{#3}\par\vspace{1pt}}
+\newlist{bul}{itemize}{1}
+\setlist[bul]{label=\textbullet,leftmargin=1.2em,itemsep=0pt,parsep=0pt,topsep=1pt,partopsep=0pt}
+\newcommand{\lead}[1]{\textbf{#1}}
+
+\begin{document}
+
+% ---------- header ----------
+\begin{center}
+  {\LARGE\bfseries ALVA SI}\\[2pt]
+  Hong Kong \;|\; \href{mailto:wsalvas02@gmail.com}{wsalvas02@gmail.com} \;|\;
+  \href{https://linkedin.com/in/alva-si-2780781b1}{\textcolor{link}{linkedin.com/in/alva-si-2780781b1}}
+\end{center}
+\vspace{-4pt}
+
+% ---------- education ----------
+\section{Education}
+
+\entry{Imperial College London}{--- MSc Computing, Distinction}{Oct 2023 -- Sep 2024}
+\begin{bul}
+  \item Individual project (79\%): built a security-focused smart-contract analysis plugin (TypeScript/React) that improved AI-generated contract security by 67\% versus the baseline co-pilot at under USD 0.003 per run.
+  \item Engineered a full-stack note-taking microservices application with RESTful APIs, containerised with Docker and deployed on Microsoft Azure with GitHub Actions CI/CD, in a team of five.
+  \item Built a neural-network library from scratch and trained a PyTorch regression model on housing prices, graded 97\% for technical implementation and reporting.
+\end{bul}
+
+\entry{Imperial College London}{--- BSc Medical Biosciences with Management, First Class Honours}{Oct 2019 -- Jun 2023}
+\begin{bul}
+  \item \lead{Dean's List, Management Year:} awarded to top 10\% of cohort.
+  \item \lead{Winner, ICBS Best Group Project:} led the quantitative analysis of a year-long study on drivers of FinTech start-up success in the UK and France, running multivariate regressions, decision trees and feature-importance models in Python and R on PitchBook data, and translating results into a data-driven report for a non-technical audience.
+  \item Relevant Modules: Finance and Financial Management 86\%, Accounting 84\%, Business Economics 79\%, Biomedicine Data Science 82\%, Research Methods and Practice 73\%.
+\end{bul}
+
+% ---------- experience ----------
+\section{Professional Experience}
+
+\entry{SleekFlow, Hong Kong}{--- Software Engineer Intern (B2B SaaS, messaging and CRM, 7000+ customers)}{Apr 2026 -- Present}
+\begin{bul}
+  \item Delivered 95+ tickets across 13 two-week Scrum sprints on a React/Typescript and C\#/.NET stack, working with product managers and QA engineers from requirements and estimation through code review, staging and production release.
+  \item Shipped 50+ tickets on team inbox, the platform's core product, including in-chat search, saved replies v1 to v2 migration, message list filters, and per channel file-size limits.
+  \item Liaised with customer support and senior engineers on 40+ production defects, shipped 5 as mid-sprint hotfixes; traced root causes using GCP and Azure logs, inbound webhook payloads, database queries and browser DevTools, and wrote plain-language updates for Customer Support team.
+  \item Served as sprint master and on-call technical support for two sprints, leading daily stand-ups, team meetings, and retrospectives.
+  \item Built a backfill tool that replays inbound webhook events with original timestamps, without re-triggering automations or notifications, backed by a dry-run mode and mutation-tested safeguards.
+\end{bul}
+
+\entry{Anlyvis, Hong Kong}{--- Data Engineer Intern (part-time)}{Jul 2025 -- Sep 2025}
+\begin{bul}
+  \item Raised computer-vision dataset quality by redesigning annotation protocols and curating training subsets; the model then met the client's accuracy requirement of over 90\% after earlier iterations had fallen short.
+  \item Automated data-ingestion pipelines in Python, cutting raw-media processing time, and wrote test suites for previously untested internal tools, reaching 100\% coverage and resolving several long-standing defects.
+\end{bul}
+
+\entry{The University of Hong Kong}{--- Bioinformatics Summer Intern}{Jul 2022 -- Sep 2022}
+\begin{bul}
+  \item Engineered a convolutional neural network in PyTorch to model RNA transcription efficiency from genomic sequences, covering data preprocessing, architecture design and performance evaluation.
+\end{bul}
+
+% ---------- skills ----------
+\section{Skills}
+\lead{Languages:} Python, C++, Java, TypeScript, SQL, R, HTML.\\
+\lead{Frontend:} React, Material UI and design tokens, Vite, i18n.\\
+\lead{Backend:} REST APIs, Flask, webhooks.\\
+\lead{Architecture:} microservices, monolithic applications, event-driven messaging, API gateways.\\
+\lead{Databases:} SQL Server, PostgreSQL, Cosmos DB, Redis.\\
+\lead{Cloud:} Microsoft Azure (Service Bus, Event Hub), Docker.\\
+\lead{Practices and Tools:} Git, CI/CD, TDD, Agile Development, Scrum, AI-Assisted Development, PostHog, Figma, PyTorch.\\
+\lead{Spoken:} English (Native), Cantonese (Fluent), Mandarin (Fluent)
+
+% ---------- activities ----------
+\section{Leadership and Activities}
+\begin{bul}
+  \item \lead{IC Hack 2024, Newcomers Runner-up:} built and presented a Spotify playlist recommendation web app based on facial expression detected mood and personal music preferences in a team of five within 24 hours.
+  \item \lead{Management Society Mentor (2023 -- 2024):} provided structured guidance to new students, tailoring advice to individual needs.
+  \item \lead{Algorithmic Trading Society, Imperial (2023):} explored quantitative trading foundations and competed in Algothon 2023.
+\end{bul}
+
+\end{document}
