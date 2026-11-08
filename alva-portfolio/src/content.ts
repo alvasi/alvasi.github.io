@@ -139,7 +139,7 @@ export const experience = [
     location: "Hong Kong",
     about: "B2B SaaS for messaging and CRM, serving 7,000+ customers.",
     bullets: [
-      "Delivered 95+ tickets across 13 two-week Scrum sprints on a React/TypeScript and C#/.NET stack, working with product managers and QA engineers from requirements through production release.",
+      "Delivered 100+ tickets across 14 two-week Scrum sprints on a React/TypeScript and C#/.NET stack, working with product managers and QA engineers from requirements through production release.",
       "Shipped 50+ tickets on team inbox, including in-chat search, saved replies v1 to v2 migration, message list filters, and per-channel file-size limits.",
       "Liaised with customer support and senior engineers on 40+ production defects, shipping 5 as mid-sprint hotfixes after tracing root causes in GCP/Azure logs, webhooks, database queries, and DevTools.",
       "Served as sprint master and on-call technical support for two sprints, leading daily stand-ups, team meetings, and retrospectives.",
