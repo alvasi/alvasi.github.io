@@ -22,16 +22,15 @@ export const copy = {
   heroKickerLight: "Hello, I’m",
   heroKickerDark: "Salutations,",
   heroLede: {
-    light:
-      "I like work that is finished to a high standard. Finding meaning in what I do is incredibly rewarding.",
-    dark: "Happiest when what I ship makes a positive impact.",
+    light: "Software engineer in Hong Kong. Currently interning at SleekFlow.",
+    dark: "Shipping product at SleekFlow. Side quests after dark.",
   },
   heroCta: { light: "See My Work", dark: "View the Work" },
   aboutTitle: { light: "A Bit About Me", dark: "About" },
   aboutP1: {
     light:
-      "Arrived at computing after a BSc in medical biosciences with management. In science I got used to testing a hypothesis and reading until I could see the gaps. Management taught me to understand the audience, and tailor adoption strategies accordingly. That’s why I like to know more about the problem, so I can develop and ship something that feels considered.",
-    dark: "Biomedicine, then management, then computing. Got used to looking for the gap, then figuring out who it’s for and how it catches on. Admirer of clean code and fan of pretty UIs.",
+      "Started in medical biosciences (yes, I finished), wandered through management, then landed in computing. Happiest when what I make is useful in practice and nice to look at.",
+    dark: "Unconventional path into software. Want what I build to be useful — and a little pretty.",
   },
   aboutP2: {
     light: "When I’m not at a keyboard I’m usually doing my nails, getting sushi, or at pilates.",
@@ -71,6 +70,15 @@ export type Project = {
 }
 
 export const projects: Project[] = [
+  {
+    name: "Task Coach",
+    kind: "Solo",
+    description:
+      "A macOS menu-bar app that quizzes you on your AI-assisted coding sessions and teaches fact-checked software engineering practice from a sourced playbook.",
+    stack: ["Swift", "SwiftUI", "macOS"],
+    github: "https://github.com/alvasi/task-coach",
+    live: null,
+  },
   {
     name: "Morrow",
     kind: "Group",
