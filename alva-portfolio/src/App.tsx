@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type CSSProperties, type ReactNode } from "react"
+import { useState, useRef, useEffect, useLayoutEffect, type CSSProperties, type ReactNode } from "react"
 import { Aquarius } from "./Aquarius"
 import {
   copy,
@@ -350,6 +350,30 @@ function ProjectCard({ project, accent }: { project: Project; accent: string }) 
 }
 
 function Projects({ dark }: { dark: boolean }) {
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    const grid = gridRef.current
+    if (!grid) return
+
+    const sync = () => {
+      const cards = [...grid.querySelectorAll<HTMLElement>(".project-card")]
+      if (cards.length === 0) return
+      cards.forEach((card) => {
+        card.style.minHeight = ""
+      })
+      const max = Math.max(...cards.map((card) => card.offsetHeight))
+      cards.forEach((card) => {
+        card.style.minHeight = `${max}px`
+      })
+    }
+
+    sync()
+    window.addEventListener("resize", sync)
+    document.fonts?.ready.then(sync).catch(() => {})
+    return () => window.removeEventListener("resize", sync)
+  }, [])
+
   return (
     <section id="projects" className="site-section section-rule">
       <div className="site-wrap">
@@ -357,7 +381,7 @@ function Projects({ dark }: { dark: boolean }) {
           <h2 className="section-title">{voice(dark, copy.projectsTitle.light, copy.projectsTitle.dark)}</h2>
           <p className="section-intro">{voice(dark, copy.projectsIntro.light, copy.projectsIntro.dark)}</p>
         </Reveal>
-        <div className="project-grid reveal-stagger">
+        <div className="project-grid reveal-stagger" ref={gridRef}>
           {projects.map((project, i) => (
             <Reveal key={project.name}>
               <ProjectCard project={project} accent={paletteCycle[i % paletteCycle.length]} />
