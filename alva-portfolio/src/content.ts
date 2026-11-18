@@ -89,14 +89,6 @@ export const projects: Project[] = [
     live: "https://morrow-web-sable.vercel.app/",
   },
   {
-    name: "Task Manager",
-    kind: "Solo",
-    description: "A full-stack task management app where users can create, update, and share tasks with others.",
-    stack: ["React", "Flask", "PostgreSQL"],
-    github: "https://github.com/alvasi/todolist",
-    live: null,
-  },
-  {
     name: "A Smarter Smart Contract IDE",
     kind: "Solo",
     description:
@@ -113,6 +105,14 @@ export const projects: Project[] = [
     stack: ["Web App", "Spotify API"],
     github: null,
     live: "https://devpost.com/software/moodswings",
+  },
+  {
+    name: "Task Manager",
+    kind: "Solo",
+    description: "A full-stack task management app where users can create, update, and share tasks with others.",
+    stack: ["React", "Flask", "PostgreSQL"],
+    github: "https://github.com/alvasi/todolist",
+    live: null,
   },
 ]
 
@@ -147,9 +147,9 @@ export const experience = [
     location: "Hong Kong",
     about: "B2B SaaS for messaging and CRM, serving 7,000+ customers.",
     bullets: [
-      "Delivered 100+ tickets across 14 two-week Scrum sprints on a React/TypeScript and C#/.NET stack, working with product managers and QA engineers from requirements through production release.",
-      "Shipped 50+ tickets on team inbox, including in-chat search, saved replies v1 to v2 migration, message list filters, and per-channel file-size limits.",
-      "Liaised with customer support and senior engineers on 40+ production defects, shipping 5 as mid-sprint hotfixes after tracing root causes in GCP/Azure logs, webhooks, database queries, and DevTools.",
+      "Delivered 130+ tickets across 15 two-week Scrum sprints on a React/TypeScript and C#/.NET stack, working with product managers and QA engineers from requirements through production release.",
+      "Shipped 55+ tickets on team inbox, including in-chat search, saved replies v1 to v2 migration, message list filters, and per-channel file-size limits.",
+      "Liaised with customer support and senior engineers on 45+ production defects, shipping 5 as mid-sprint hotfixes after tracing root causes in GCP/Azure logs, webhooks, database queries, and DevTools.",
       "Served as sprint master and on-call technical support for two sprints, leading daily stand-ups, team meetings, and retrospectives.",
       "Built a backfill tool that replays inbound webhook events with original timestamps, without re-triggering automations or notifications, backed by a dry-run mode and mutation-tested safeguards.",
     ],

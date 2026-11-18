@@ -360,7 +360,7 @@ function Projects({ dark }: { dark: boolean }) {
         <div className="project-grid reveal-stagger">
           {projects.map((project, i) => (
             <Reveal key={project.name}>
-              <ProjectCard project={project} accent={paletteCycle[i % 4]} />
+              <ProjectCard project={project} accent={paletteCycle[i % paletteCycle.length]} />
             </Reveal>
           ))}
         </div>
